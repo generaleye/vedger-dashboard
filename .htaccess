@@ -1,5 +1,10 @@
 RewriteEngine on
 
+# Redirect index and index.html to home.html
+RewriteBase /
+RewriteRule ^index\.html?$ /home.html [NC,R,L]
+RewriteRule ^index?$ /home.html [NC,R,L]
+
 RewriteCond %{THE_REQUEST} /([^.]+)\.html [NC]
 RewriteRule ^ /%1 [NC,L,R]
 
