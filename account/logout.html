@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- [Head] start -->
+<head>
+    <title>Logout - Vedger</title>
+</head>
+<!-- [Head] end -->
+<!-- [Body] Start -->
+
+<body data-pc-direction="ltr" data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-theme="light" data-pc-theme_contrast="true">
+<script src="../assets/js/plugins/jquery-3.7.1.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Function to handle logout
+        function logout() {
+            // Clear all session storage
+            sessionStorage.clear();
+
+            // Redirect to login page
+            window.location.href = 'login.html';
+        }
+
+        // Call the logout function when the page is loaded
+        logout();
+    });
+</script>
+</body>
+<!-- [Body] end -->
+
+</html>

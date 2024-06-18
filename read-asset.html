@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- [Head] start -->
+<head>
+  <title>Asset - Vedger</title>
+  <!-- [Meta] -->
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" name="viewport" />
+  <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- [Favicon] icon -->
+  <link href="assets/images/favicon.svg" rel="icon" type="image/x-icon" />
+
+  <!-- [Font] Family -->
+  <link href="assets/fonts/inter/inter.css" id="main-font-link" rel="stylesheet" />
+  <!-- [Tabler Icons] https://tablericons.com -->
+  <link href="assets/fonts/tabler-icons.min.css" rel="stylesheet" />
+  <!-- [Feather Icons] https://feathericons.com -->
+  <link href="assets/fonts/feather.css" rel="stylesheet" />
+  <!-- [Font Awesome Icons] https://fontawesome.com/icons -->
+  <link href="assets/fonts/fontawesome.css" rel="stylesheet" />
+  <!-- [Material Icons] https://fonts.google.com/icons -->
+  <link href="assets/fonts/material.css" rel="stylesheet" />
+  <!-- [Template CSS Files] -->
+  <link href="assets/css/style.css" id="main-style-link" rel="stylesheet" />
+  <link href="assets/css/style-preset.css" rel="stylesheet" />
+</head>
+<!-- [Head] end -->
+<!-- [Body] Start -->
+<body data-pc-direction="ltr" data-pc-layout="vertical" data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-theme="light" data-pc-theme_contrast="true">
+<!-- [ Pre-loader ] start -->
+<div class="page-loader">
+  <div class="bar"></div>
+</div>
+<!-- [ Pre-loader ] End -->
+<!-- [ Sidebar Menu ] start -->
+<nav class="pc-sidebar">
+  <div class="navbar-wrapper">
+    <div class="m-header">
+      <a class="b-brand text-primary" href="home.html">
+        <img alt="logo" class="img-fluid logo-md" src="assets/images/logo-dark.svg" />
+      </a>
+    </div>
+    <div class="navbar-content">
+      <ul class="pc-navbar">
+        <li class="pc-item pc-caption">
+          <label>Navigation</label>
+        </li>
+        <li class="pc-item active">
+          <a class="pc-link" href="home.html">
+            <span class="pc-micon">
+              <svg class="pc-icon"><use xlink:href="#custom-home"></use></svg>
+            </span>
+            <span class="pc-mtext">Home</span>
+          </a>
+        </li>
+        <li class="pc-item">
+          <a class="pc-link" href="profile.html">
+            <span class="pc-micon">
+              <svg class="pc-icon"><use xlink:href="#custom-user-bold"></use></svg>
+            </span>
+            <span class="pc-mtext">Profile</span>
+          </a>
+        </li>
+        <li class="pc-item">
+          <a class="pc-link" href="settings.html">
+            <span class="pc-micon">
+              <svg class="pc-icon"><use xlink:href="#custom-setting-2"></use></svg>
+            </span>
+            <span class="pc-mtext">Settings</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- [ Sidebar Menu ] end -->
+<!-- [ Header Topbar ] start -->
+<header class="pc-header">
+  <div class="header-wrapper"> <!-- [Mobile Media Block] start -->
+    <div class="me-auto pc-mob-drp">
+      <ul class="list-unstyled">
+        <!-- ======= Menu collapse Icon ===== -->
+        <li class="pc-h-item pc-sidebar-collapse">
+          <a class="pc-head-link ms-0" href="#" id="sidebar-hide">
+            <i class="ti ti-menu-2"></i>
+          </a>
+        </li>
+        <li class="pc-h-item pc-sidebar-popup">
+          <a class="pc-head-link ms-0" href="#" id="mobile-collapse">
+            <i class="ti ti-menu-2"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- [Mobile Media Block end] -->
+    <div class="ms-auto">
+      <ul class="list-unstyled">
+        <li class="dropdown pc-h-item header-user-profile">
+          <a aria-expanded="false" aria-haspopup="false" class="pc-head-link dropdown-toggle arrow-none me-0"
+            data-bs-auto-close="outside" data-bs-toggle="dropdown" href="#" role="button">
+            <img alt="user-image" class="user-avtar" src="assets/images/user/user-avatar.svg" />
+          </a>
+          <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
+            <div class="dropdown-body">
+              <div class="profile-notification-scroll position-relative" style="max-height: calc(100vh - 225px)">
+                <div class="d-flex mb-1">
+                  <div class="flex-shrink-0">
+                    <img alt="user-image" class="user-avtar wid-35" src="assets/images/user/user-avatar.svg" />
+                  </div>
+                  <div class="flex-grow-1 ms-3">
+                    <h6 class="mb-1" id="nav-profile-name"></h6>
+                    <span id="nav-profile-email"></span>
+                  </div>
+                </div>
+                <hr class="border-secondary border-opacity-50" />
+                <a class="dropdown-item" href="profile.html">
+                  <span>
+                    <svg class="pc-icon text-muted me-2"><use xlink:href="#custom-user-bold"></use></svg>
+                    <span>Profile</span>
+                  </span>
+                </a>
+                <a class="dropdown-item" href="settings.html">
+                  <span>
+                    <svg class="pc-icon text-muted me-2"><use xlink:href="#custom-setting-2"></use></svg>
+                    <span>Settings</span>
+                  </span>
+                </a>
+                <hr class="border-secondary border-opacity-50" />
+                <div class="d-grid mb-3">
+                  <a class="btn btn-primary" href="account/logout.html">
+                    <svg class="pc-icon me-2"><use xlink:href="#custom-logout-1-outline"></use></svg>
+                    Logout
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- [ Header ] end -->
+
+<!-- [ Main Content ] start -->
+<div class="pc-container">
+  <div class="pc-content">
+    <!-- [ breadcrumb ] start -->
+    <div class="page-header">
+      <div class="page-block">
+        <div class="row align-items-center">
+          <div class="col-md-12">
+            <div class="page-header-title">
+              <h2 class="mb-0">Asset</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- [ breadcrumb ] end -->
+
+    <!-- [ Main Content ] start -->
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+<!--          <div class="card-header">-->
+<!--            <h5>Asset Details</h5>-->
+<!--          </div>-->
+          <div class="card-body">
+            <div class="card shadow-none border">
+              <div class="card-header">
+                <div class="d-flex align-items-center">
+                  <div class="flex-shrink-0">
+                    <div class="avtar avtar-l btn-light-secondary rounded-circle">
+                      <i class="ti ti-photo f-18"></i>
+                    </div>
+                  </div>
+                  <div class="flex-grow-1 mx-3">
+                    <h4 class="mb-0" id="asset-name"></h4>
+                    <p class="mb-0" id="asset-type"></p>
+                  </div>
+                  <div class="flex-shrink-0">
+                    <a class="btn btn-sm btn-light-secondary" id="asset-update-button" role="button"><i class="ti ti-edit"></i> Edit</a>
+                    <a class="btn btn-sm btn-light-secondary" id="asset-delete-button" role="button"><i class="ti ti-thrash"></i> Delete</a>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="row g-3">
+                  <div class="col-md-8">
+                    <div class="card shadow-none border mb-0">
+                      <div class="card-body">
+                        <div class="d-flex align-items-center">
+                          <div class="flex-grow-1 me-3">
+                            <h5 class="mb-0">Description</h5>
+                          </div>
+                        </div>
+                        <div class="mt-3">
+                          <p id="asset-description"></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="card shadow-none border mb-0 h-100">
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="mb-3">
+                              <h5 class="mb-2">Current Value</h5>
+                              <p class="mb-3" id="asset-current-value"></p>
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="mb-3">
+                              <h5 class="mb-2">Initial Value</h5>
+                              <p class="mb-3" id="asset-initial-value"></p>
+                            </div>
+                          </div>
+                        </div>
+                        <!--  [ Add Asset Value Modal ] launch -->
+                        <button type="button" id="addAssetValueModalButton" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addAssetValueModal">Add Asset Value</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row g-3">
+              <div class="col-md-6 col-xl-4">
+                <div class="card shadow-none border mb-0">
+                  <div class="card-body">
+                    <h5 class="mb-3">Created By</h5>
+                    <p class="mb-3" id="asset-creator"></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 col-xl-4">
+                <div class="card shadow-none border mb-0">
+                  <div class="card-body">
+                    <h5 class="mb-3">Created Date</h5>
+                    <p class="mb-3" id="asset-created-date"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header d-flex align-items-center justify-content-between">
+            <h5>Valuations</h5>
+            <div>
+              <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link active" id="pills-list-tab" data-bs-toggle="pill" href="#pills-list" role="tab" aria-controls="pills-list" aria-selected="true">List</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link" id="pills-graph-tab" data-bs-toggle="pill" href="#pills-graph" role="tab" aria-controls="pills-graph" aria-selected="false" tabindex="-1">Graph</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="card-body pc-component">
+
+            <div class="tab-content" id="pills-tabContent">
+              <div class="tab-pane fade active show" id="pills-list" role="tabpanel" aria-labelledby="pills-list-tab">
+                <div class="table-responsive">
+                  <table class="table table-hover" id="pc-dt-simple">
+                    <thead>
+                    <tr>
+                      <th>Value</th>
+                      <th>Date and Time</th>
+                      <th>Note</th>
+                      <th>Added By</th>
+                      <th class="text-end">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody id="asset-valuation-container"></tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="pills-graph" role="tabpanel" aria-labelledby="pills-graph-tab">
+                <div id="line-chart-1"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- [ Main Content ] end -->
+
+  </div>
+</div>
+<!-- [ Main Content ] end -->
+
+<!--[ Modal Content ] start -->
+<div>
+  <!--  [ Add Asset Value Modal ] start -->
+  <div id="addAssetValueModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addAssetValueModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addAssetValueModalLabel">Add Asset Value</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div id="add-value-message-container"></div>
+        <form id="add-asset-value">
+          <div class="modal-body ">
+            <div class="mb-3">
+              <label for="add_value" class="form-label">Value</label>
+              <input type="number" step="any" class="form-control" id="add_value" name="add_value" aria-describedby="" placeholder="Enter Value">
+            </div>
+            <div class="mb-3">
+              <label for="add_value_date" class="form-label">Value Date</label>
+              <input type="datetime-local" class="form-control" id="add_value_date" name="add_value_date" aria-describedby="" placeholder="Enter Date the asset was valued">
+            </div>
+            <div class="mb-3">
+              <label for="add_note" class="form-label">Note</label>
+              <textarea class="form-control" id="add_note" name="add_note" rows="1"></textarea>
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <input id="currency_id" name="currency_id" type="hidden" value="4">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <input type="submit" id="submit" class="btn btn-primary btn-md" value="Add">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!--  [ Add Asset Value Modal ] end -->
+
+  <!--  [ Update Asset Value Modal ] start -->
+  <div id="updateAssetValueModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="updateAssetValueModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateAssetValueModalLabel">Update Asset Value</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div id="update-value-message-container"></div>
+        <form id="update-asset-value">
+          <div class="modal-body ">
+            <div class="mb-3">
+              <label for="update_value" class="form-label">Value</label>
+              <input type="number" step="any" class="form-control" id="update_value" aria-describedby="" placeholder="Enter Value">
+            </div>
+            <div class="mb-3">
+              <label for="update_value_date" class="form-label">Value Date</label>
+              <input type="datetime-local" class="form-control" id="update_value_date" aria-describedby="" placeholder="Enter Date the asset was valued">
+            </div>
+            <div class="mb-3">
+              <label for="update_note" class="form-label">Note</label>
+              <textarea class="form-control" id="update_note" name="add_note" rows="1"></textarea>
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <input id="valuation_id" name="valuation_id" type="hidden" value="0">
+            <input id="currency_id_update" name="currency_id" type="hidden" value="4">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <input type="submit" id="update" class="btn btn-primary btn-md" value="Update">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!--  [ Update Asset Value Modal ] end -->
+</div>
+<!--[ Modal Content ] end -->
+<footer class="pc-footer">
+  <div class="footer-wrapper container-fluid">
+    <div class="row">
+      <div class="col my-1">
+        <p class="m-0">&copy;2024 Vedger</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- [Page Specific JS] start -->
+<!-- [Page Specific JS] end -->
+<!-- Required Js -->
+<script src="assets/js/plugins/popper.min.js"></script>
+<script src="assets/js/plugins/simplebar.min.js"></script>
+<script src="assets/js/plugins/bootstrap.min.js"></script>
+<script src="assets/js/plugins/jquery-3.7.1.min.js"></script>
+<script src="assets/js/check-login.js"></script>
+<script src="assets/js/read-asset.js"></script>
+<script src="assets/js/fonts/custom-font.js"></script>
+<script src="assets/js/theme.js"></script>
+<script src="assets/js/plugins/feather.min.js"></script>
+<script src="assets/js/plugins/apexcharts.min.js"></script>
+
+
+</body>
+<!-- [Body] end -->
+</html>

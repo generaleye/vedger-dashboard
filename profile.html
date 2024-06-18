@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- [Head] start -->
+<head>
+  <title>Profile - Vedger</title>
+  <!-- [Meta] -->
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" name="viewport" />
+  <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- [Favicon] icon -->
+  <link href="assets/images/favicon.svg" rel="icon" type="image/x-icon" />
+
+  <!-- [Font] Family -->
+  <link href="assets/fonts/inter/inter.css" id="main-font-link" rel="stylesheet" />
+  <!-- [Tabler Icons] https://tablericons.com -->
+  <link href="assets/fonts/tabler-icons.min.css" rel="stylesheet" />
+  <!-- [Feather Icons] https://feathericons.com -->
+  <link href="assets/fonts/feather.css" rel="stylesheet" />
+  <!-- [Font Awesome Icons] https://fontawesome.com/icons -->
+  <link href="assets/fonts/fontawesome.css" rel="stylesheet" />
+  <!-- [Material Icons] https://fonts.google.com/icons -->
+  <link href="assets/fonts/material.css" rel="stylesheet" />
+  <!-- [Template CSS Files] -->
+  <link href="assets/css/style.css" id="main-style-link" rel="stylesheet" />
+  <link href="assets/css/style-preset.css" rel="stylesheet" />
+</head>
+<!-- [Head] end -->
+<!-- [Body] Start -->
+<body data-pc-direction="ltr" data-pc-layout="vertical" data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-theme="light" data-pc-theme_contrast="true">
+<!-- [ Pre-loader ] start -->
+<div class="page-loader">
+  <div class="bar"></div>
+</div>
+<!-- [ Pre-loader ] End -->
+<!-- [ Sidebar Menu ] start -->
+<nav class="pc-sidebar">
+  <div class="navbar-wrapper">
+    <div class="m-header">
+      <a class="b-brand text-primary" href="home.html">
+        <img alt="logo" class="img-fluid logo-md" src="assets/images/logo-dark.svg" />
+      </a>
+    </div>
+    <div class="navbar-content">
+      <ul class="pc-navbar">
+        <li class="pc-item pc-caption">
+          <label>Navigation</label>
+        </li>
+        <li class="pc-item">
+          <a class="pc-link" href="home.html">
+            <span class="pc-micon">
+              <svg class="pc-icon"><use xlink:href="#custom-home"></use></svg>
+            </span>
+            <span class="pc-mtext">Home</span>
+          </a>
+        </li>
+        <li class="pc-item active">
+          <a class="pc-link" href="./profile.html">
+            <span class="pc-micon">
+              <svg class="pc-icon"><use xlink:href="#custom-user-bold"></use></svg>
+            </span>
+            <span class="pc-mtext">Profile</span>
+          </a>
+        </li>
+        <li class="pc-item">
+          <a class="pc-link" href="settings.html">
+            <span class="pc-micon">
+              <svg class="pc-icon"><use xlink:href="#custom-setting-2"></use></svg>
+            </span>
+            <span class="pc-mtext">Settings</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- [ Sidebar Menu ] end -->
+<!-- [ Header Topbar ] start -->
+<header class="pc-header">
+  <div class="header-wrapper"> <!-- [Mobile Media Block] start -->
+    <div class="me-auto pc-mob-drp">
+      <ul class="list-unstyled">
+        <!-- ======= Menu collapse Icon ===== -->
+        <li class="pc-h-item pc-sidebar-collapse">
+          <a class="pc-head-link ms-0" href="#" id="sidebar-hide">
+            <i class="ti ti-menu-2"></i>
+          </a>
+        </li>
+        <li class="pc-h-item pc-sidebar-popup">
+          <a class="pc-head-link ms-0" href="#" id="mobile-collapse">
+            <i class="ti ti-menu-2"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- [Mobile Media Block end] -->
+    <div class="ms-auto">
+      <ul class="list-unstyled">
+        <li class="dropdown pc-h-item header-user-profile">
+          <a aria-expanded="false" aria-haspopup="false" class="pc-head-link dropdown-toggle arrow-none me-0"
+            data-bs-auto-close="outside" data-bs-toggle="dropdown" href="#" role="button">
+            <img alt="user-image" class="user-avtar" src="assets/images/user/user-avatar.svg" />
+          </a>
+          <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
+            <div class="dropdown-body">
+              <div class="profile-notification-scroll position-relative" style="max-height: calc(100vh - 225px)">
+                <div class="d-flex mb-1">
+                  <div class="flex-shrink-0">
+                    <img alt="user-image" class="user-avtar wid-35" src="assets/images/user/user-avatar.svg" />
+                  </div>
+                  <div class="flex-grow-1 ms-3">
+                    <h6 class="mb-1" id="nav-profile-name"></h6>
+                    <span id="nav-profile-email"></span>
+                  </div>
+                </div>
+                <hr class="border-secondary border-opacity-50" />
+                <a class="dropdown-item" href="profile.html">
+                  <span>
+                    <svg class="pc-icon text-muted me-2"><use xlink:href="#custom-user-bold"></use></svg>
+                    <span>Profile</span>
+                  </span>
+                </a>
+                <a class="dropdown-item" href="settings.html">
+                  <span>
+                    <svg class="pc-icon text-muted me-2"><use xlink:href="#custom-setting-2"></use></svg>
+                    <span>Settings</span>
+                  </span>
+                </a>
+                <hr class="border-secondary border-opacity-50" />
+                <div class="d-grid mb-3">
+                  <a class="btn btn-primary" href="account/logout.html">
+                    <svg class="pc-icon me-2"><use xlink:href="#custom-logout-1-outline"></use></svg>
+                    Logout
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- [ Header ] end -->
+
+<!-- [ Main Content ] start -->
+<div class="pc-container">
+  <div class="pc-content">
+    <!-- [ breadcrumb ] start -->
+    <div class="page-header">
+      <div class="page-block">
+        <div class="row align-items-center">
+          <div class="col-md-12">
+            <div class="page-header-title">
+              <h2 class="mb-0">Profile</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- [ breadcrumb ] end -->
+
+    <!-- [ Main Content ] start -->
+
+    <div class="row">
+      <!-- [ sample-page ] start -->
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-body py-0">
+            <ul class="nav nav-tabs profile-tabs" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="profile-tab-1" data-bs-toggle="tab" href="#profile-1" role="tab" aria-selected="true">
+                  <i class="ti ti-user me-2"></i>Profile
+                </a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="profile-tab-2" data-bs-toggle="tab" href="#profile-2" role="tab" aria-selected="false" tabindex="-1">
+                  <i class="ti ti-file-text me-2"></i>Update Profile
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="tab-content">
+          <div class="tab-pane active show" id="profile-1" role="tabpanel" aria-labelledby="profile-tab-1">
+            <div class="row">
+              <div class="col-lg-4 col-xxl-3">
+                <div class="card">
+                  <div class="card-body position-relative">
+                    <div class="text-center mt-3">
+                      <h5 class="mb-0" id="profile-name"></h5>
+                      <p class="text-muted text-sm" id="profile-email"></p>
+                      <hr class="my-3 border border-secondary-subtle">
+                      <div class="row g-3">
+                        <div class="col-6">
+                          <h5 class="mb-0" id="profile-no-of-assets"></h5>
+                          <small class="text-muted">Assets</small>
+                        </div>
+                        <div class="col-6">
+                          <h5 class="mb-0" id="profile-net-worth"></h5>
+                          <small class="text-muted">Net Worth</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-8 col-xxl-9">
+                <div class="card">
+                  <div class="card-header">
+                    <h5>Profile Details</h5>
+                  </div>
+                  <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item px-0 pt-0">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <p class="mb-1 text-muted">First Name</p>
+                            <p class="mb-0 profile-first-name"></p>
+                          </div>
+                          <div class="col-md-6">
+                            <p class="mb-1 text-muted">Last Name</p>
+                            <p class="mb-0 profile-last-name"></p>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="list-group-item px-0">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <p class="mb-1 text-muted">Phone Number</p>
+                            <p class="mb-0 profile-phone-number"></p>
+                          </div>
+                          <div class="col-md-6">
+                            <p class="mb-1 text-muted">Email Address</p>
+                            <p class="mb-0 profile-email-address"></p>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="list-group-item px-0">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <p class="mb-1 text-muted">Preferred Currency</p>
+                            <p class="mb-0 profile-preferred-currency">$</p>
+                          </div>
+                          <div class="col-md-6">
+                            <p class="mb-1 text-muted">Nationality</p>
+                            <p class="mb-0 profile-nationality">USA</p>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane" id="profile-2" role="tabpanel" aria-labelledby="profile-tab-2">
+            <div class="row">
+              <form id="update-profile-form">
+                <div class="col-lg-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <h5>Update Profile Details</h5>
+                    </div>
+                    <div class="card-body">
+                      <div id="message-container"></div>
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <div class="mb-3">
+                            <label class="form-label">First Name</label>
+                            <input type="text" class="form-control profile-first-name" id="update-profile-first-name" required>
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="mb-3">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" class="form-control profile-last-name" id="update-profile-last-name" required>
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="mb-3">
+                            <label class="form-label">Phone Number</label>
+                            <input type="text" class="form-control profile-phone-number" id="update-profile-phone-number" required>
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="mb-3">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-control profile-email-address" readonly required>
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="mb-3">
+                            <label class="form-label">Preferred Currency</label>
+                            <select class="form-control">
+                              <option>EUR</option>
+                              <option>NGN</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="mb-3">
+                            <label class="form-label">Nationality</label>
+                            <select class="form-control">
+                              <option>Germany</option>
+                              <option>Nigeria</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group mb-3">
+                          <input id="country_id" name="country_id" type="hidden" value="1">
+                          <input id="currency_id" name="currency_id" type="hidden" value="4">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 text-end btn-page">
+                  <input type="submit" id="submit" class="btn btn-primary btn-md" value="Update Profile">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- [ sample-page ] end -->
+    </div>
+
+    <!-- [ Main Content ] end -->
+
+  </div>
+</div>
+<!-- [ Main Content ] end -->
+<footer class="pc-footer">
+  <div class="footer-wrapper container-fluid">
+    <div class="row">
+      <div class="col my-1">
+        <p class="m-0">&copy;2024 Vedger</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- [Page Specific JS] start -->
+<!-- [Page Specific JS] end -->
+<!-- Required Js -->
+<script src="assets/js/plugins/popper.min.js"></script>
+<script src="assets/js/plugins/simplebar.min.js"></script>
+<script src="assets/js/plugins/bootstrap.min.js"></script>
+<script src="assets/js/plugins/jquery-3.7.1.min.js"></script>
+<script src="assets/js/check-login.js"></script>
+<script src="assets/js/profile.js"></script>
+<script src="assets/js/fonts/custom-font.js"></script>
+<script src="assets/js/theme.js"></script>
+<script src="assets/js/plugins/feather.min.js"></script>
+
+</body>
+<!-- [Body] end -->
+</html>

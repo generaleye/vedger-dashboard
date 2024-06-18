@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- [Head] start -->
+<head>
+  <title>Register - Vedger</title>
+  <!-- [Meta] -->
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" name="viewport">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- [Favicon] icon -->
+  <link href="../assets/images/favicon.svg" rel="icon" type="image/x-icon"> <!-- [Font] Family -->
+  <link href="../assets/fonts/inter/inter.css" id="main-font-link" rel="stylesheet" />
+  <!-- [Tabler Icons] https://tablericons.com -->
+  <link href="../assets/fonts/tabler-icons.min.css" rel="stylesheet" >
+  <!-- [Feather Icons] https://feathericons.com -->
+  <link href="../assets/fonts/feather.css" rel="stylesheet" >
+  <!-- [Font Awesome Icons] https://fontawesome.com/icons -->
+  <link href="../assets/fonts/fontawesome.css" rel="stylesheet" >
+  <!-- [Material Icons] https://fonts.google.com/icons -->
+  <link href="../assets/fonts/material.css" rel="stylesheet" >
+  <!-- [Template CSS Files] -->
+  <link href="../assets/css/style.css" id="main-style-link" rel="stylesheet" >
+  <link href="../assets/css/style-preset.css" rel="stylesheet" >
+
+</head>
+<!-- [Head] end -->
+<!-- [Body] Start -->
+
+<body data-pc-direction="ltr" data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-theme="light" data-pc-theme_contrast="true">
+<!-- [ Pre-loader ] start -->
+<div class="loader-bg">
+  <div class="loader-track">
+    <div class="loader-fill"></div>
+  </div>
+</div>
+<!-- [ Pre-loader ] End -->
+
+<div class="auth-main">
+  <div class="auth-wrapper v1">
+    <div class="auth-form">
+      <div class="card my-5">
+        <div class="card-body">
+          <div class="text-center">
+            <a href="./register.html"><img alt="img" class="mb-4 img-fluid" src="../assets/images/logo-dark.svg"></a>
+          </div>
+          <div id="message-container"></div>
+          <div class="saprator my-3"></div>
+          <h4 class="text-center f-w-500 mb-3">Sign up with your email address.</h4>
+          <form id="signup-form">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group mb-3">
+                  <input id="first_name" name="first_name" class="form-control" placeholder="First Name" type="text" required>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group mb-3">
+                  <input id="last_name" name="last_name" class="form-control" placeholder="Last Name" type="text" required>
+                </div>
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <input id="email_address" name="email_address" class="form-control" placeholder="Email Address" type="email">
+            </div>
+            <div class="form-group mb-3">
+              <input id="phone_number" name="phone_number" class="form-control" placeholder="Phone Number" type="text">
+            </div>
+            <div class="form-group mb-3">
+              <input id="password" name="password" class="form-control" placeholder="Password" type="password">
+            </div>
+            <div class="form-group mb-3">
+              <input id="confirm_password" name="confirm_password" class="form-control" placeholder="Confirm Password" type="password">
+            </div>
+            <div class="form-group mb-3">
+              <input id="country_id" name="country_id" type="hidden" value="1">
+              <input id="currency_id" name="currency_id" type="hidden" value="4">
+            </div>
+<!--            <div class="d-flex mt-1 justify-content-between">-->
+<!--              <div class="form-check">-->
+<!--                <input checked="" class="form-check-input input-primary" id="customCheckc1" type="checkbox">-->
+<!--                <label class="form-check-label text-muted" for="customCheckc1">I agree to all the <a class="link-primary" href="#">Terms & Conditions</a></label>-->
+<!--              </div>-->
+<!--            </div>-->
+            <div class="d-grid mt-4">
+              <input type="submit" id="submit" class="btn btn-primary btn-md" value="Sign Up">
+            </div>
+          </form>
+          <div class="d-flex justify-content-between align-items-end mt-4">
+            <h6 class="f-w-500 mb-0">Have an Account?</h6>
+            <a class="link-primary" href="login.html">Login</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- [ Main Content ] end -->
+<!-- Required Js -->
+<script src="../assets/js/plugins/popper.min.js"></script>
+<script src="../assets/js/plugins/simplebar.min.js"></script>
+<script src="../assets/js/plugins/bootstrap.min.js"></script>
+<script src="../assets/js/plugins/jquery-3.7.1.min.js"></script>
+<script src="../assets/js/fonts/custom-font.js"></script>
+<script src="../assets/js/theme.js"></script>
+<script src="../assets/js/auth.js"></script>
+<script src="../assets/js/plugins/feather.min.js"></script>
+<!-- [Page Specific JS] start -->
+<!-- jquery-validation Js -->
+<script src="../assets/js/plugins/bouncer.min.js"></script>
+<script src="../assets/js/plugins/form-validation.js"></script>
+<!-- [Page Specific JS] end -->
+</body>
+<!-- [Body] end -->
+
+</html>
