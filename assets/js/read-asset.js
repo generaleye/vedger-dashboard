@@ -71,8 +71,8 @@ $(document).ready(function() {
                 $('#asset-name').html(data.name);
                 $('#asset-type').html(data.type.name);
                 $('#asset-description').html(data.description);
-                $('#asset-current-value').html(parseFloat(data.current_monetary_value).toLocaleString() ?? '-');
-                $('#asset-initial-value').html(parseFloat(data.initial_monetary_value).toLocaleString() ?? '-');
+                $('#asset-current-value').html(parseFloat(data.current_value).toLocaleString() + ' ' + data.currency.code ?? '-').prop('title', parseFloat(data.preferred_current_value).toLocaleString() + ' ' + data.preferred_currency.code);
+                $('#asset-initial-value').html(parseFloat(data.initial_value).toLocaleString() + ' ' + data.currency.code ?? '-');
 
                 $('#asset-creator').html(data.creator.first_name + ' ' + data.creator.last_name);
                 $('#asset-created-date').html(new Date(data.created_at.substring(0,data.created_at.length-1)).toLocaleString('en-US', {
@@ -121,7 +121,7 @@ $(document).ready(function() {
                     var valuatedWithoutZDate= new Date(valuatedWithoutZ);
 
                     var $asset_valuation_row = $('<tr>');
-                    $asset_valuation_row.append($('<td>').html(parseFloat(data[key].monetary_value).toLocaleString() ?? '-'));
+                    $asset_valuation_row.append($('<td>').html(parseFloat(data[key].value).toLocaleString() + ' ' + data[key].currency.code ?? '-'));
                     $asset_valuation_row.append($('<td>').html(valuatedWithoutZDate.toLocaleDateString() + ' <span class="text-muted text-sm d-block">' + valuatedWithoutZDate.toLocaleTimeString() + '</span>'));
                     if (data[key].note == null) {
                         $asset_valuation_row.append($('<td>').html('-'));
@@ -140,7 +140,7 @@ $(document).ready(function() {
 
                     $('#asset-valuation-container').append($asset_valuation_row);
 
-                    chart_valuation_data_y_axis.push(data[key].monetary_value);
+                    chart_valuation_data_y_axis.push(data[key].value);
                     chart_valuation_date_x_axis.push(data[key].valuated_at.substring(0, 16).replace('T', ' '));
                 });
 
@@ -203,7 +203,7 @@ $(document).ready(function() {
                 xhr.setRequestHeader('Authorization', 'Bearer ' + token);
             },
             data: {
-                monetary_value: $add_value,
+                value: $add_value,
                 valuated_at: $add_value_date,
                 note: $add_note,
                 currency_id: $currency_id,
@@ -240,7 +240,7 @@ $(document).ready(function() {
                 xhr.setRequestHeader('Authorization', 'Bearer ' + token);
             },
             data: {
-                monetary_value: $update_value,
+                value: $update_value,
                 valuated_at: $update_value_date,
                 note: $update_note,
                 currency_id: $currency_id,
@@ -288,7 +288,7 @@ $(document).ready(function() {
                     const pad = (num) => String(num).padStart(2, '0');
                     const htmlDateTimeLocal = `${valuatedWithoutZDate.getFullYear()}-${pad(valuatedWithoutZDate.getMonth() + 1)}-${pad(valuatedWithoutZDate.getDate())}T${pad(valuatedWithoutZDate.getHours())}:${pad(valuatedWithoutZDate.getMinutes())}`;
 
-                    $('#update_value').val(data.monetary_value);
+                    $('#update_value').val(data.value);
                     $('#update_note').val(data.note);
                     $('#update_value_date').val(htmlDateTimeLocal);
 

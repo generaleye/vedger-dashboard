@@ -47,7 +47,7 @@ $(document).ready(function() {
                     var $asset_row = $('<tr>');
                     $asset_row.append($('<td>').html(data[key].name));
                     $asset_row.append($('<td>').html(data[key].type.name));
-                    $asset_row.append($('<td>').html(parseFloat(data[key].current_monetary_value).toLocaleString() ?? '-'));
+                    $asset_row.append($('<td>').html(parseFloat(data[key].current_value).toLocaleString() + ' ' + data[key].currency.code ?? '-').prop('title', parseFloat(data[key].preferred_current_value).toLocaleString() + ' ' + data[key].preferred_currency.code));
                     $asset_row.append($('<td>').html(valuatedWithoutZDate.toLocaleDateString() + ' <span class="text-muted text-sm d-block">' + valuatedWithoutZDate.toLocaleTimeString() + '</span>'));
                     if (data[key].description.length > 80) {
                         $asset_row.append($('<td>').html(data[key].description.substring(0, 75) + ' ...'));

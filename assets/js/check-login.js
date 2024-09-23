@@ -35,7 +35,7 @@ $(document).ready(function() {
                     $('#overview-no-of-assets').html(response.data.no_of_assets);
                 }
                 if ($('#overview-net-worth').length) {
-                    $('#overview-net-worth').html(parseFloat(response.data.net_worth).toLocaleString());
+                    $('#overview-net-worth').html(parseFloat(response.data.net_worth).toLocaleString() + ' ' + response.data.preferred_currency.code);
                 }
             }
         });

@@ -201,7 +201,7 @@
                 </div>
                 <div class="card-body">
                   <div class="row g-3">
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                       <div class="card shadow-none border mb-0">
                         <div class="card-body">
                           <div class="mb-3">
@@ -211,14 +211,23 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                       <div class="card shadow-none border mb-0 h-100">
                         <div class="card-body">
                           <div class="row">
                             <div class="col-sm-6">
                               <div class="mb-3">
                                 <h5 class="mb-2">Current Value</h5>
-                                <input type="number" step="any" class="form-control" id="monetary_value" name="monetary_value" placeholder="0">
+                                <input type="number" step="any" class="form-control" id="value" name="value" placeholder="0.00" value="0.00">
+                              </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                              <div class="mb-3">
+                                <h5 class="mb-2">Currency</h5>
+                                <select class="form-control" id="asset_currency">
+
+                                </select>
                               </div>
                             </div>
                           </div>
