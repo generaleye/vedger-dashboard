@@ -10,7 +10,6 @@ $(document).ready(function() {
         // Retrieve token from session storage
         var token = sessionStorage.getItem('access_token');
         if (!token) {
-            console.log('No token found.');
             // Redirect to login page
             window.location.href = './account/login';
         }

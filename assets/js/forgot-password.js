@@ -9,71 +9,29 @@ $(document).ready(function() {
         return domain_parts.join('.');
     }
 
-    // Get the resource ID from the URL
-    const asset_id = getIdFromUrl();
+    verifyLogin();
 
-    // If the ID is present, fetch the resource details
-    if (asset_id) {
-        loadAsset(asset_id);
-    } else {
-        window.location.href = './home';
+    function verifyLogin(){
+        // Retrieve uuid from session storage
+        var $access_token = sessionStorage.getItem('access_token');
+
+        if ($access_token !== null) {
+            window.location.href = '../home';
+        }
     }
 
-    // Function to get the ID from the URL
-    function getIdFromUrl() {
-        const urlParams= new URLSearchParams(window.location.search);
-        return urlParams.get('id');
-    }
-
-    // Function to handle login checks
-    function loadAsset(asset_id) {
-        // Retrieve token from session storage
-        var token = sessionStorage.getItem('access_token');
-
-        $.ajax({
-            type: 'GET',
-            url: protocol + '//api.' + base_domain + '/v1/assets/' + asset_id,
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-            },
-            error: function(response) {
-                window.location.href = './home';
-            },
-            success: function (response) {
-                var data = response.data;
-
-                $('#asset_name').val(data.name);
-                $('#asset_type').val(data.type.id);
-                $('#asset_description').val(data.description);
-            }
-        });
-    }
-
-    $('#cancel-update-button').on('click', function() {
-        window.location.href = './read-asset.html?id=' + asset_id;
-    } );
-
-    $('#update-asset-form').on('submit', function(event) {
+    $('#forgot-password-form').on('submit', function(event) {
         event.preventDefault();
         $('#message-container').html('');
         $('#submit').prop("disabled", true);
 
-        var $asset_name = $('#asset_name').val();
-        var $asset_type = $('#asset_type').val();
-        var $asset_description = $('#asset_description').val();
-
-        var token = sessionStorage.getItem('access_token');
+        var $email_address = $('#email_address').val();
 
         $.ajax({
-            type: 'PATCH',
-            url: protocol + '//api.' + base_domain + '/v1/assets/' + asset_id,
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-            },
+            type: 'POST',
+            url: protocol + '//api.' + base_domain + '/v1/users/forgot-password',
             data: {
-                name: $asset_name,
-                type_id: $asset_type,
-                description: $asset_description,
+                email_address: $email_address
             },
             error: function(response) {
                 var err = JSON.parse(response.responseText);
@@ -87,8 +45,48 @@ $(document).ready(function() {
                 if ($status === 'success') {
                     var successHtml = generateSuccessHtml(response.message);
                     $('#message-container').html(successHtml);
+                    $('#forgot-password-form-div').hide();
+                }
+            }
+        });
+    });
 
-                    window.location.href = './read-asset.html?id=' + asset_id;
+    $('#reset-password-form').on('submit', function(event) {
+        event.preventDefault();
+        $('#message-container').html('');
+        $('#submit').prop("disabled", true);
+
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+
+        var $email_address = urlParams.get('email');
+        var $token = urlParams.get('token');
+
+        var $new_password = $('#new_password').val();
+        var $new_password_confirmation = $('#confirm_new_password').val();
+
+        $.ajax({
+            type: 'POST',
+            url: protocol + '//api.' + base_domain + '/v1/users/reset-password',
+            data: {
+                email_address: $email_address,
+                token: $token,
+                new_password: $new_password,
+                new_password_confirmation: $new_password_confirmation,
+            },
+            error: function(response) {
+                var err = JSON.parse(response.responseText);
+                var errorHtml = generateErrorHtml(err.message);
+                $('#message-container').html(errorHtml);
+                $('#submit').prop("disabled", false);
+            },
+            success: function (response) {
+                var $status = response.status;
+
+                if ($status === 'success') {
+                    var successHtml = generateSuccessHtml(response.message);
+                    $('#message-container').html(successHtml);
+                    $('#reset-password-form-div').hide();
                 }
             }
         });
@@ -107,5 +105,4 @@ $(document).ready(function() {
             '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
             '</div>';
     }
-
 });

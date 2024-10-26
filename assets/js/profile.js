@@ -69,6 +69,9 @@ $(document).ready(function() {
 
     $('#update-profile-form').on('submit', function(event) {
         event.preventDefault();
+        $('#message-container').html('');
+        $('#submit').prop("disabled", true);
+
         var $first_name = $('#update-profile-first-name').val();
         var $last_name = $('#update-profile-last-name').val();
         var $phone_number = $('#update-profile-phone-number').val();
@@ -94,14 +97,32 @@ $(document).ready(function() {
                 var err = JSON.parse(response.responseText);
                 var errorHtml = generateErrorHtml(err.message);
                 $('#message-container').html(errorHtml);
+                $('#submit').prop("disabled", false);
             },
             success: function (response) {
                 var status = response.status;
 
                 if (status === 'success') {
+                    var successHtml = generateSuccessHtml(response.message);
+                    $('#message-container').html(successHtml);
+
                     window.location.href = './profile';
                 }
             }
         });
     });
+
+    function generateSuccessHtml(message) {
+        return '<div class="alert alert-success alert-dismissible fade show" role="alert">' +
+            '   <div><i class="fas fa-check-circle"> </i> ' + message + '</div>' +
+            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
+            '</div>';
+    }
+
+    function generateErrorHtml(message) {
+        return '<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
+            '   <div><i class="fas fa-exclamation-triangle"> </i> ' + message + '</div>' +
+            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
+            '</div>';
+    }
 });

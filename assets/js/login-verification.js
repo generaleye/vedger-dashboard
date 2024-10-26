@@ -9,27 +9,36 @@ $(document).ready(function() {
         return domain_parts.join('.');
     }
 
-    $('#change-password-form').on('submit', function(event) {
+    verifyLogin();
+
+    function verifyLogin(){
+        // Retrieve uuid from session storage
+        var $uuid = sessionStorage.getItem('uuid');
+        var $access_token = sessionStorage.getItem('access_token');
+
+        if ($uuid === null) {
+            window.location.href = './login';
+        }
+
+        if ($access_token !== null) {
+            window.location.href = '../home';
+        }
+    }
+
+    $('#login-verification-form').on('submit', function(event) {
         event.preventDefault();
         $('#message-container').html('');
         $('#submit').prop("disabled", true);
 
-        var $old_password = $('#old_password').val();
-        var $new_password = $('#new_password').val();
-        var $new_password_confirmation = $('#new_password_confirmation').val();
-
-        var token = sessionStorage.getItem('access_token');
+        var $uuid = sessionStorage.getItem('uuid');
+        var $token = $('#token').val();
 
         $.ajax({
             type: 'POST',
-            url: protocol + '//api.' + base_domain + '/v1/users/change-password',
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-            },
+            url: protocol + '//api.' + base_domain + '/v1/users/verify-login',
             data: {
-                old_password: $old_password,
-                new_password: $new_password,
-                new_password_confirmation: $new_password_confirmation,
+                uuid: $uuid,
+                token: $token,
             },
             error: function(response) {
                 var err = JSON.parse(response.responseText);
@@ -40,8 +49,13 @@ $(document).ready(function() {
             success: function (response) {
                 var $status = response.status;
 
-                var successHtml = generateSuccessHtml(response.message);
-                $('#message-container').html(successHtml);
+                if ($status === 'success') {
+                    var successHtml = generateSuccessHtml(response.message);
+                    $('#message-container').html(successHtml);
+
+                    sessionStorage.setItem('access_token', response.data.access_token);
+                    window.location.href = '../home';
+                }
             }
         });
     });
@@ -59,5 +73,4 @@ $(document).ready(function() {
             '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
             '</div>';
     }
-
 });

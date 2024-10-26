@@ -11,6 +11,8 @@ $(document).ready(function() {
 
     $('#signup-form').on('submit', function(event) {
         event.preventDefault();
+        $('#message-container').html('');
+        $('#submit').prop("disabled", true);
 
         var $first_name = $('#first_name').val();
         var $last_name = $('#last_name').val();
@@ -38,13 +40,13 @@ $(document).ready(function() {
                 var err = JSON.parse(response.responseText);
                 var errorHtml = generateErrorHtml(err.message);
                 $('#message-container').html(errorHtml);
+                $('#submit').prop("disabled", false);
             },
             success: function (response) {
                 var $status = response.status;
 
                 if ($status === 'success') {
-                    sessionStorage.setItem('access_token', response.data.access_token);
-                    window.location.href = '../home';
+                    window.location.href = './signup-successful';
                 }
             }
         });
@@ -52,6 +54,9 @@ $(document).ready(function() {
 
     $('#login-form').on('submit', function(event) {
         event.preventDefault();
+        $('#message-container').html('');
+        $('#submit').prop("disabled", true);
+
         var $email_address = $('#email_address').val();
         var $password = $('#password').val();
 
@@ -66,22 +71,33 @@ $(document).ready(function() {
                 var err = JSON.parse(response.responseText);
                 var errorHtml = generateErrorHtml(err.message);
                 $('#message-container').html(errorHtml);
+                $('#submit').prop("disabled", false);
             },
             success: function (response) {
                 var $status = response.status;
 
                 if ($status === 'success') {
-                    sessionStorage.setItem('access_token', response.data.access_token);
-                    window.location.href = '../home';
+                    var successHtml = generateSuccessHtml(response.message);
+                    $('#confirmation-message').html(successHtml);
+
+                    sessionStorage.setItem('uuid', response.data.uuid);
+                    window.location.href = './login-verification';
                 }
             }
         });
     });
 
+    function generateSuccessHtml(message) {
+        return '<div class="alert alert-success alert-dismissible fade show" role="alert">' +
+            '   <div><i class="fas fa-check-circle"> </i> ' + message + '</div>' +
+            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
+            '</div>';
+    }
+
     function generateErrorHtml(message) {
         return '<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
-            '<strong>An error occurred! </strong>' + message +
-            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
+            '   <div><i class="fas fa-exclamation-triangle"> </i> ' + message + '</div>' +
+            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
             '</div>';
     }
 });

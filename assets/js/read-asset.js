@@ -189,6 +189,9 @@ $(document).ready(function() {
 
     $('#add-asset-value').on('submit', function(event) {
         event.preventDefault();
+        $('#add-value-message-container').html('');
+        $('#submit').prop("disabled", true);
+
         var $add_value = parseFloat($('#add_value').val()).toFixed(2);
         var $add_value_date = $('#add_value_date').val();
         var $add_note = $('#add_note').val();
@@ -212,11 +215,15 @@ $(document).ready(function() {
                 var err = JSON.parse(response.responseText);
                 var errorHtml = generateErrorHtml(err.message);
                 $('#add-value-message-container').html(errorHtml);
+                $('#submit').prop("disabled", false);
             },
             success: function (response) {
                 var $status = response.status;
 
                 if ($status === 'success') {
+                    var successHtml = generateSuccessHtml(response.message);
+                    $('#add-value-message-container').html(successHtml);
+
                     window.location.href = './read-asset.html?id=' + asset_id;
                 }
             }
@@ -225,6 +232,9 @@ $(document).ready(function() {
 
     $('#update-asset-value').on('submit', function( event ) {
         event.preventDefault();
+        $('#update-value-message-container').html('');
+        $('#update').prop("disabled", true);
+
         var $update_value = parseFloat($('#update_value').val()).toFixed(2);
         var $update_value_date = $('#update_value_date').val();
         var $update_note = $('#update_note').val();
@@ -249,11 +259,15 @@ $(document).ready(function() {
                 var err = JSON.parse(response.responseText);
                 var errorHtml = generateErrorHtml(err.message);
                 $('#update-value-message-container').html(errorHtml);
+                $('#update').prop("disabled", false);
             },
             success: function (response) {
                 var $status = response.status;
 
                 if ($status === 'success') {
+                    var successHtml = generateSuccessHtml(response.message);
+                    $('#update-value-message-container').html(successHtml);
+
                     window.location.href = './read-asset.html?id=' + asset_id;
                 }
             }
@@ -324,10 +338,17 @@ $(document).ready(function() {
         }
     });
 
+    function generateSuccessHtml(message) {
+        return '<div class="alert alert-success alert-dismissible fade show" role="alert">' +
+            '   <div><i class="fas fa-check-circle"> </i> ' + message + '</div>' +
+            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
+            '</div>';
+    }
+
     function generateErrorHtml(message) {
         return '<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
-            '<strong>An error occurred! </strong>' + message +
-            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
+            '   <div><i class="fas fa-exclamation-triangle"> </i> ' + message + '</div>' +
+            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
             '</div>';
     }
 });
