@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- [Head] start -->
+<head>
+  <title>Contacts - Vedger</title>
+  <!-- [Meta] -->
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" name="viewport" />
+  <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- [Favicon] icon -->
+  <link href="assets/images/favicon.svg" rel="icon" type="image/x-icon" />
+
+  <!-- [Font] Family -->
+  <link href="assets/fonts/inter/inter.css" id="main-font-link" rel="stylesheet" />
+  <!-- [Tabler Icons] https://tablericons.com -->
+  <link href="assets/fonts/tabler-icons.min.css" rel="stylesheet" />
+  <!-- [Feather Icons] https://feathericons.com -->
+  <link href="assets/fonts/feather.css" rel="stylesheet" />
+  <!-- [Font Awesome Icons] https://fontawesome.com/icons -->
+  <link href="assets/fonts/fontawesome.css" rel="stylesheet" />
+  <!-- [Material Icons] https://fonts.google.com/icons -->
+  <link href="assets/fonts/material.css" rel="stylesheet" />
+  <!-- [Template CSS Files] -->
+  <link href="assets/css/style.css" id="main-style-link" rel="stylesheet" />
+  <link href="assets/css/style-preset.css" rel="stylesheet" />
+</head>
+<!-- [Head] end -->
+<!-- [Body] Start -->
+<body data-pc-direction="ltr" data-pc-layout="vertical" data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-theme="light" data-pc-theme_contrast="true">
+<!-- [ Pre-loader ] start -->
+<div class="page-loader">
+  <div class="bar"></div>
+</div>
+<!-- [ Pre-loader ] End -->
+<!-- [ Sidebar Menu ] start -->
+<nav class="pc-sidebar">
+  <div class="navbar-wrapper">
+    <div class="m-header">
+      <a class="b-brand text-primary" href="./home.html">
+        <img alt="logo" class="img-fluid logo-md" src="assets/images/logo.svg" />
+      </a>
+    </div>
+    <div class="navbar-content">
+      <ul class="pc-navbar">
+        <li class="pc-item pc-caption">
+          <label>Navigation</label>
+        </li>
+        <li class="pc-item">
+          <a class="pc-link" href="./home.html">
+            <span class="pc-micon">
+              <i class="ti ti-home"></i>
+            </span>
+            <span class="pc-mtext">Home</span>
+          </a>
+        </li>
+        <li class="pc-item active">
+          <a class="pc-link" href="contacts.html">
+              <span class="pc-micon">
+                <i class="ti ti-users" style="height: 50px"></i>
+              </span>
+            <span class="pc-mtext">Contacts</span>
+          </a>
+        </li>
+        <li class="pc-item">
+          <a class="pc-link" href="envelopes.html">
+              <span class="pc-micon">
+                <i class="ti ti-mail"></i>
+              </span>
+            <span class="pc-mtext">Envelopes</span>
+          </a>
+        </li>
+        <li class="pc-item">
+          <a class="pc-link" href="profile.html">
+            <span class="pc-micon">
+              <i class="ti ti-user"></i>
+            </span>
+            <span class="pc-mtext">Profile</span>
+          </a>
+        </li>
+        <li class="pc-item">
+          <a class="pc-link" href="settings.html">
+            <span class="pc-micon">
+              <i class="ti ti-settings"></i>
+            </span>
+            <span class="pc-mtext">Settings</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- [ Sidebar Menu ] end -->
+<!-- [ Header Topbar ] start -->
+<header class="pc-header">
+  <div class="header-wrapper"> <!-- [Mobile Media Block] start -->
+    <div class="me-auto pc-mob-drp">
+      <ul class="list-unstyled">
+        <!-- ======= Menu collapse Icon ===== -->
+        <li class="pc-h-item pc-sidebar-collapse">
+          <a class="pc-head-link ms-0" href="#" id="sidebar-hide">
+            <i class="ti ti-menu-2"></i>
+          </a>
+        </li>
+        <li class="pc-h-item pc-sidebar-popup">
+          <a class="pc-head-link ms-0" href="#" id="mobile-collapse">
+            <i class="ti ti-menu-2"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- [Mobile Media Block end] -->
+    <div class="ms-auto">
+      <ul class="list-unstyled">
+        <li class="dropdown pc-h-item header-user-profile">
+          <a aria-expanded="false" aria-haspopup="false" class="pc-head-link dropdown-toggle arrow-none me-0"
+            data-bs-auto-close="outside" data-bs-toggle="dropdown" href="#" role="button">
+            <img alt="user-image" class="user-avtar" src="assets/images/user/user-avatar.svg" />
+          </a>
+          <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
+            <div class="dropdown-body">
+              <div class="profile-notification-scroll position-relative" style="max-height: calc(100vh - 225px)">
+                <div class="d-flex mb-1">
+                  <div class="flex-shrink-0">
+                    <img alt="user-image" class="user-avtar wid-35" src="assets/images/user/user-avatar.svg" />
+                  </div>
+                  <div class="flex-grow-1 ms-3">
+                    <h6 class="mb-1" id="nav-profile-name"></h6>
+                    <span id="nav-profile-email"></span>
+                  </div>
+                </div>
+                <hr class="border-secondary border-opacity-50" />
+                <a class="dropdown-item" href="profile.html">
+                  <span>
+                    <i class="ti ti-user"></i>
+                    <span>Profile</span>
+                  </span>
+                </a>
+                <a class="dropdown-item" href="settings.html">
+                  <span>
+                    <i class="ti ti-settings"></i>
+                    <span>Settings</span>
+                  </span>
+                </a>
+                <hr class="border-secondary border-opacity-50" />
+                <div class="d-grid mb-3">
+                  <a class="btn btn-primary" href="account/logout.html">
+                    <i class="ti ti-logout"></i>
+                    Logout
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- [ Header ] end -->
+
+<!-- [ Main Content ] start -->
+<div class="pc-container">
+  <div class="pc-content">
+    <!-- [ breadcrumb ] start -->
+    <div class="page-header">
+      <div class="page-block">
+        <div class="row align-items-center">
+          <div class="col-md-12">
+            <div class="page-header-title">
+              <h2 class="mb-0">Contacts</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- [ breadcrumb ] end -->
+
+    <!-- [ Main Content ] start -->
+    <div class="row">
+      <div class="col-12">
+        <div id="message-container"></div>
+        <div class="card table-card">
+          <div class="card-header d-flex align-items-center justify-content-between py-3">
+            <h5 class="mb-0">Contacts</h5>
+            <div>
+              <a href="create-contact.html" class="btn btn-primary">Add Contact</a>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover" id="pc-dt-simple">
+                <thead>
+                <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email Address</th>
+                  <th>Phone Number</th>
+                  <th>Description</th>
+                  <th>Date Added</th>
+                  <th class="text-end">Actions</th>
+                </tr>
+                </thead>
+                <tbody id="contact-container">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- [ Main Content ] end -->
+
+  </div>
+
+  <!--  [ Update Contact Modal ] start -->
+  <div id="updateContactModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="updateContactModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateContactModalLabel">Update Contact</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div id="update-contact-message-container"></div>
+        <form id="update-contact">
+          <div class="modal-body ">
+            <div class="mb-3">
+              <label for="update_contact_first_name" class="form-label">First Name</label>
+              <input type="text" class="form-control" id="update_contact_first_name" aria-describedby="" placeholder="First Name" disabled>
+            </div>
+            <div class="mb-3">
+              <label for="update_contact_last_name" class="form-label">Last Name</label>
+              <input type="text" class="form-control" id="update_contact_last_name" aria-describedby="" placeholder="Last Name" disabled>
+            </div>
+            <div class="mb-3">
+              <label for="update_contact_email_address" class="form-label">Email Address</label>
+              <input type="text" class="form-control" id="update_contact_email_address" aria-describedby="" placeholder="Email Address" disabled>
+            </div>
+            <div class="mb-3">
+              <label for="update_contact_phone_number" class="form-label">First Name</label>
+              <input type="text" class="form-control" id="update_contact_phone_number" aria-describedby="" placeholder="Phone Number" disabled>
+            </div>
+            <div class="mb-3">
+              <label for="update_contact_description" class="form-label">Description</label>
+              <input type="text" class="form-control" id="update_contact_description" aria-describedby="" placeholder="Description">
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <input id="contact_id" name="contact_id" type="hidden" value="">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <input type="submit" id="update" class="btn btn-primary btn-md" value="Update">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!--  [ Update Contact Modal ] end -->
+</div>
+<!-- [ Main Content ] end -->
+<footer class="pc-footer">
+  <div class="footer-wrapper container-fluid">
+    <div class="row">
+      <div class="col my-1">
+        <p class="m-0">&copy;2024 Vedger</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- [Page Specific JS] start -->
+<!-- [Page Specific JS] end -->
+<!-- Required Js -->
+<script src="assets/js/plugins/popper.min.js"></script>
+<script src="assets/js/plugins/simplebar.min.js"></script>
+<script src="assets/js/plugins/bootstrap.min.js"></script>
+<script src="assets/js/plugins/jquery-3.7.1.min.js"></script>
+<script src="assets/js/check-login.js"></script>
+<script src="assets/js/contacts.js"></script>
+<script src="assets/js/fonts/custom-font.js"></script>
+<script src="assets/js/theme.js"></script>
+<script src="assets/js/plugins/feather.min.js"></script>
+
+
+</body>
+<!-- [Body] end -->
+</html>
