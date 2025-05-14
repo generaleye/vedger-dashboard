@@ -2,7 +2,7 @@
 <html lang="en">
 <!-- [Head] start -->
 <head>
-  <title>Contacts - Vedger</title>
+  <title>Update Envelope - Vedger</title>
   <!-- [Meta] -->
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" name="viewport" />
@@ -39,7 +39,7 @@
 <nav class="pc-sidebar">
   <div class="navbar-wrapper">
     <div class="m-header">
-      <a class="b-brand text-primary" href="./home.html">
+      <a class="b-brand text-primary" href="home.html">
         <img alt="logo" class="img-fluid logo-md" src="assets/images/logo.svg" />
       </a>
     </div>
@@ -49,14 +49,14 @@
           <label>Navigation</label>
         </li>
         <li class="pc-item">
-          <a class="pc-link" href="./home.html">
+          <a class="pc-link" href="home.html">
             <span class="pc-micon">
               <i class="ti ti-home"></i>
             </span>
             <span class="pc-mtext">Home</span>
           </a>
         </li>
-        <li class="pc-item active">
+        <li class="pc-item">
           <a class="pc-link" href="contacts.html">
               <span class="pc-micon">
                 <i class="ti ti-users" style="height: 50px"></i>
@@ -64,7 +64,7 @@
             <span class="pc-mtext">Contacts</span>
           </a>
         </li>
-        <li class="pc-item">
+        <li class="pc-item active">
           <a class="pc-link" href="envelopes.html">
               <span class="pc-micon">
                 <i class="ti ti-mail"></i>
@@ -170,7 +170,7 @@
         <div class="row align-items-center">
           <div class="col-md-12">
             <div class="page-header-title">
-              <h2 class="mb-0">Contacts</h2>
+              <h2 class="mb-0">Update Envelope</h2>
             </div>
           </div>
         </div>
@@ -180,33 +180,44 @@
 
     <!-- [ Main Content ] start -->
     <div class="row">
-      <div class="col-12">
+      <div class="col-sm-12">
         <div id="message-container"></div>
-        <div class="card table-card">
-          <div class="card-header d-flex align-items-center justify-content-between py-3">
-            <h5 class="mb-0">Contacts</h5>
-            <div>
-              <a href="" id="addContactModalButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addContactModal">Add Contact</a>
-            </div>
-          </div>
+        <div class="card">
           <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-hover" id="pc-dt-simple">
-                <thead>
-                <tr>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Email Address</th>
-                  <th>Phone Number</th>
-                  <th>Description</th>
-                  <th>Date Added</th>
-                  <th class="text-end">Actions</th>
-                </tr>
-                </thead>
-                <tbody id="contact-container">
-                </tbody>
-              </table>
+            <form id="update-envelope-form">
+              <div class="card shadow-none border">
+                <div class="card-header">
+                  <div class="d-flex align-items-center">
+                    <div class="flex-grow-1 mx-3">
+                      <div class="col-md-6">
+                        <div class="mb-3">
+                          <h5 class="mb-2">Title</h5>
+                          <input type="text" class="form-control" id="envelope_title" name="envelope_title" placeholder="Enter envelope title" required>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="row g-3">
+                    <div class="col-md-12">
+                      <div class="card shadow-none border mb-0">
+                        <div class="card-body">
+                          <div class="mb-3">
+                            <h5 class="mb-2">Description</h5>
+                            <textarea class="form-control" id="envelope_description" name="envelope_description" required></textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 text-end btn-page">
+              <a class="btn btn-outline-secondary" id="cancel-update-button">Cancel</a>
+              <input type="submit" id="submit" class="btn btn-primary btn-md" value="Update">
             </div>
+            </form>
           </div>
         </div>
       </div>
@@ -214,93 +225,6 @@
     <!-- [ Main Content ] end -->
 
   </div>
-
-  <!--  [ Add Contact Modal ] start -->
-  <div id="addContactModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addContactModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="addContactModalLabel">Add Contact</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div id="add-contact-message-container"></div>
-        <form id="add-contact">
-          <div class="modal-body ">
-            <div class="mb-3">
-              <label for="update_contact_first_name" class="form-label">First Name</label>
-              <input type="text" class="form-control" id="add_contact_first_name" aria-describedby="" placeholder="First Name">
-            </div>
-            <div class="mb-3">
-              <label for="update_contact_last_name" class="form-label">Last Name</label>
-              <input type="text" class="form-control" id="add_contact_last_name" aria-describedby="" placeholder="Last Name">
-            </div>
-            <div class="mb-3">
-              <label for="update_contact_email_address" class="form-label">Email Address</label>
-              <input type="text" class="form-control" id="add_contact_email_address" aria-describedby="" placeholder="Email Address">
-            </div>
-            <div class="mb-3">
-              <label for="update_contact_phone_number" class="form-label">Phone Number</label>
-              <input type="text" class="form-control" id="add_contact_phone_number" aria-describedby="" placeholder="Phone Number">
-            </div>
-            <div class="mb-3">
-              <label for="update_contact_description" class="form-label">Description</label>
-              <input type="text" class="form-control" id="add_contact_description" aria-describedby="" placeholder="Description">
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <input type="submit" id="add" class="btn btn-primary btn-md" value="Add Contact">
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-  <!--  [ Add Contact Modal ] end -->
-
-  <!--  [ Update Contact Modal ] start -->
-  <div id="updateContactModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="updateContactModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="updateContactModalLabel">Update Contact</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div id="update-contact-message-container"></div>
-        <form id="update-contact">
-          <div class="modal-body ">
-            <div class="mb-3">
-              <label for="update_contact_first_name" class="form-label">First Name</label>
-              <input type="text" class="form-control" id="update_contact_first_name" aria-describedby="" placeholder="First Name" disabled>
-            </div>
-            <div class="mb-3">
-              <label for="update_contact_last_name" class="form-label">Last Name</label>
-              <input type="text" class="form-control" id="update_contact_last_name" aria-describedby="" placeholder="Last Name" disabled>
-            </div>
-            <div class="mb-3">
-              <label for="update_contact_email_address" class="form-label">Email Address</label>
-              <input type="text" class="form-control" id="update_contact_email_address" aria-describedby="" placeholder="Email Address" disabled>
-            </div>
-            <div class="mb-3">
-              <label for="update_contact_phone_number" class="form-label">Phone Number</label>
-              <input type="text" class="form-control" id="update_contact_phone_number" aria-describedby="" placeholder="Phone Number" disabled>
-            </div>
-            <div class="mb-3">
-              <label for="update_contact_description" class="form-label">Description</label>
-              <input type="text" class="form-control" id="update_contact_description" aria-describedby="" placeholder="Description">
-            </div>
-          </div>
-          <div class="form-group mb-3">
-            <input id="contact_id" name="contact_id" type="hidden" value="">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <input type="submit" id="update" class="btn btn-primary btn-md" value="Update">
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-  <!--  [ Update Contact Modal ] end -->
 </div>
 <!-- [ Main Content ] end -->
 <footer class="pc-footer">
@@ -321,11 +245,10 @@
 <script src="assets/js/plugins/bootstrap.min.js"></script>
 <script src="assets/js/plugins/jquery-3.7.1.min.js"></script>
 <script src="assets/js/check-login.js"></script>
-<script src="assets/js/contacts.js"></script>
+<script src="assets/js/update-envelope.js"></script>
 <script src="assets/js/fonts/custom-font.js"></script>
 <script src="assets/js/theme.js"></script>
 <script src="assets/js/plugins/feather.min.js"></script>
-
 
 </body>
 <!-- [Body] end -->
