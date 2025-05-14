@@ -31,7 +31,7 @@ $(document).ready(function() {
                         };
                     });
 
-                    var multipleAssets = new Choices(document.getElementById('envelope_assets'), {
+                    new Choices(document.getElementById('envelope_assets'), {
                         delimiter: ',',
                         editItems: true,
                         removeItemButton: true,
@@ -67,7 +67,7 @@ $(document).ready(function() {
                         };
                     });
 
-                    var multipleContacts = new Choices(document.getElementById('envelope_contacts'), {
+                    new Choices(document.getElementById('envelope_contacts'), {
                         delimiter: ',',
                         editItems: true,
                         removeItemButton: true,

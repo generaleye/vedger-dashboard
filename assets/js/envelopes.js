@@ -39,7 +39,7 @@ $(document).ready(function() {
                     $('#envelope-container').append($envelope_row);
                 }
 
-                $.each(data, function (key, value) {
+                $.each(data, function (key) {
                     var valuatedWithoutZ= data[key].created_at.substring(0,data[key].created_at.length-1);
                     var valuatedWithoutZDate= new Date(valuatedWithoutZ);
 

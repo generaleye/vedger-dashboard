@@ -38,7 +38,7 @@ $(document).ready(function() {
             beforeSend: function (xhr) {
                 xhr.setRequestHeader('Authorization', 'Bearer ' + token);
             },
-            error: function (response) {
+            error: function () {
                 window.location.href = './home';
             },
             success: function (response) {
@@ -98,7 +98,7 @@ $(document).ready(function() {
             beforeSend: function (xhr) {
                 xhr.setRequestHeader('Authorization', 'Bearer ' + token);
             },
-            error: function (response) {
+            error: function () {
                 window.location.href = './home';
             },
             success: function (response) {
@@ -112,7 +112,7 @@ $(document).ready(function() {
                     $('#envelope-assets-container').append($envelope_asset_item);
                 }
 
-                $.each(data, function (key, value) {
+                $.each(data, function (key) {
                     const $envelope_asset_item = $('<li>', { class: 'list-group-item px-0' });
                     const $outerDiv = $('<div>', { class: 'd-flex align-items-center' });
                     const $contentWrapper = $('<div>', { class: 'flex-grow-1 ms-3' });
@@ -179,7 +179,7 @@ $(document).ready(function() {
                                 };
                             });
 
-                            var multipleAssets = new Choices(document.getElementById('add-envelope-asset'), {
+                            new Choices(document.getElementById('add-envelope-asset'), {
                                 delimiter: ',',
                                 editItems: true,
                                 removeItemButton: true,
@@ -265,7 +265,7 @@ $(document).ready(function() {
             beforeSend: function (xhr) {
                 xhr.setRequestHeader('Authorization', 'Bearer ' + token);
             },
-            error: function (response) {
+            error: function () {
                 window.location.href = './home';
             },
             success: function (response) {
@@ -279,7 +279,7 @@ $(document).ready(function() {
                     $('#envelope-contacts-container').append($envelope_contact_item);
                 }
 
-                $.each(data, function (key, value) {
+                $.each(data, function (key) {
                     const $envelope_contact_item = $('<li>', { class: 'list-group-item px-0' });
                     const $outerDiv = $('<div>', { class: 'd-flex align-items-center' });
                     const $contentWrapper = $('<div>', { class: 'flex-grow-1 ms-3' });
@@ -346,7 +346,7 @@ $(document).ready(function() {
                                 };
                             });
 
-                            var multipleContacts = new Choices(document.getElementById('add-envelope-contact'), {
+                            new Choices(document.getElementById('add-envelope-contact'), {
                                 delimiter: ',',
                                 editItems: true,
                                 removeItemButton: true,
