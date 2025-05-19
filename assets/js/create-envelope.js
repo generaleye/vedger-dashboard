@@ -36,7 +36,7 @@ $(document).ready(function() {
                         editItems: true,
                         removeItemButton: true,
                         placeholder: true,
-                        placeholderValue: 'Select your assets',
+                        placeholderValue: 'Select at least one of your assets',
                     }).setChoices(function () {
                         return assetArray
                     });
@@ -72,7 +72,7 @@ $(document).ready(function() {
                         editItems: true,
                         removeItemButton: true,
                         placeholder: true,
-                        placeholderValue: 'Select your contacts',
+                        placeholderValue: 'Select at least one of your contacts',
                     }).setChoices(function () {
                         return contactArray
                     });
@@ -94,37 +94,55 @@ $(document).ready(function() {
         var $envelope_assets = $('#envelope_assets').val();
         var $envelope_contacts = $('#envelope_contacts').val();
 
-        var token = sessionStorage.getItem('access_token');
+        var minimumCountError = false;
 
-        $.ajax({
-            type: 'POST',
-            url: protocol + '//api.' + base_domain + '/v1/envelopes',
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-            },
-            data: {
-                title: $envelope_title,
-                description: $envelope_description,
-                assets: $envelope_assets,
-                contacts: $envelope_contacts
-            },
-            error: function(response) {
-                var err = JSON.parse(response.responseText);
-                var errorHtml = generateErrorHtml(err.message);
-                $('#message-container').html(errorHtml);
-                $('#submit').prop("disabled", false);
-            },
-            success: function (response) {
-                var $status = response.status;
+        if ($envelope_assets.length < 1) {
+            minimumCountError = true;
+            // $('#message-container').html("Please select at least one asset");
+            alert("Error: Please select at least one asset");
+            $('#submit').prop("disabled", false);
+        }
 
-                if ($status === 'success') {
-                    var successHtml = generateSuccessHtml(response.message);
-                    $('#message-container').html(successHtml);
+        if (($envelope_contacts.length < 1) && (!minimumCountError)) {
+            minimumCountError = true;
+            // $('#message-container').html("Please select at least one contact");
+            alert("Error: Please select at least one contact");
+            $('#submit').prop("disabled", false);
+        }
 
-                    window.location.href = './read-envelope.html?id='+response.data.uuid;
+        if (!minimumCountError) {
+            var token = sessionStorage.getItem('access_token');
+
+            $.ajax({
+                type: 'POST',
+                url: protocol + '//api.' + base_domain + '/v1/envelopes',
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+                },
+                data: {
+                    title: $envelope_title,
+                    description: $envelope_description,
+                    assets: $envelope_assets,
+                    contacts: $envelope_contacts
+                },
+                error: function(response) {
+                    var err = JSON.parse(response.responseText);
+                    var errorHtml = generateErrorHtml(err.message);
+                    $('#message-container').html(errorHtml);
+                    $('#submit').prop("disabled", false);
+                },
+                success: function (response) {
+                    var $status = response.status;
+
+                    if ($status === 'success') {
+                        var successHtml = generateSuccessHtml(response.message);
+                        $('#message-container').html(successHtml);
+
+                        window.location.href = './read-envelope.html?id='+response.data.uuid;
+                    }
                 }
-            }
-        });
+            });
+        }
     });
 
     function generateSuccessHtml(message) {
