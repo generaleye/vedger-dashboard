@@ -116,6 +116,10 @@ $(document).ready(function() {
                     second: 'numeric',
                     hour12: false,
                 }));
+
+                if (data.delivery_status === 'sent') {
+                    $('#envelope-update-button').hide();
+                }
             }
         });
     }
