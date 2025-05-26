@@ -40,8 +40,11 @@ $(document).ready(function() {
                 }
 
                 $.each(data, function (key) {
-                    var valuatedWithoutZ= data[key].created_at.substring(0,data[key].created_at.length-1);
-                    var valuatedWithoutZDate= new Date(valuatedWithoutZ);
+                    var createdAtWithoutZ= data[key].created_at.substring(0,data[key].created_at.length-1);
+                    var createdWithoutZDate= new Date(createdAtWithoutZ);
+
+                    var sendAtWithoutZ= data[key].scheduled_send_at.substring(0,data[key].scheduled_send_at.length-1);
+                    var sendWithoutZDate= new Date(sendAtWithoutZ);
 
                     var $envelope_row = $('<tr>');
                     $envelope_row.append($('<td>').html(data[key].title));
@@ -50,7 +53,10 @@ $(document).ready(function() {
                     } else {
                         $envelope_row.append($('<td>').html(data[key].description));
                     }
-                    $envelope_row.append($('<td>').html(valuatedWithoutZDate.toLocaleDateString() + ' <span class="text-muted text-sm d-block">' + valuatedWithoutZDate.toLocaleTimeString() + '</span>'));
+                    $envelope_row.append($('<td>').html(data[key].alert_frequency.charAt(0).toUpperCase() + data[key].alert_frequency.slice(1)));
+                    $envelope_row.append($('<td>').html(sendWithoutZDate.toLocaleDateString() + ' <span class="text-muted text-sm d-block">' + sendWithoutZDate.toLocaleTimeString() + '</span>'));
+                    $envelope_row.append($('<td>').html(data[key].delivery_status.charAt(0).toUpperCase() + data[key].delivery_status.slice(1)));
+                    $envelope_row.append($('<td>').html(createdWithoutZDate.toLocaleDateString() + ' <span class="text-muted text-sm d-block">' + createdWithoutZDate.toLocaleTimeString() + '</span>'));
                     $envelope_row.append($('<td>').addClass('text-end')
                         .html(
                             '<a class="avtar avtar-xs btn-link-secondary" href="read-envelope.html?id=' + data[key].uuid + '"><i class="ti ti-eye f-20"></i></a>' +
