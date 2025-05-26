@@ -32,7 +32,7 @@ $(document).ready(function() {
 
                 if (data.length === 0) {
                     var $envelope_row = $('<tr>');
-                    $envelope_row.append($('<td>').addClass('text-center').attr('colspan', 4)
+                    $envelope_row.append($('<td>').addClass('text-center').attr('colspan', 7)
                         .html('No Data Available')
                     );
 
