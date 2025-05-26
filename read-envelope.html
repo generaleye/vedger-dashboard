@@ -218,7 +218,7 @@
                                             <div class="card-body">
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-grow-1 me-3">
-                                                        <h5 class="mb-0">Description</h5>
+                                                        <h5 class="mb-3">Description</h5>
                                                     </div>
                                                 </div>
                                                 <div class="mt-3">
@@ -230,12 +230,65 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row g-3">
+                            <div class="col-md-4 col-xl-4">
+                                <div class="card shadow-none border">
+                                    <div class="card-body">
+                                        <h5 class="mb-3">Frequency</h5>
+                                        <div class="mb-2">
+                                            <h4><span id="envelope-frequency" class="badge bg-light-primary"></span></h4>
+                                        </div>
+
+                                        <hr class="my-3">
+
+                                        <h5 class="mb-3">Scheduled Send Date</h5>
+                                        <h4 id="envelope-scheduled-send-date" class="mb-3 fw-normal fs-5 text-muted"></h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-xl-4">
+                                <div class="card shadow-none border">
+                                    <div class="card-body">
+                                        <h5 class="mb-3">Reminder Email Alerts</h5>
+                                        <div class="form-check form-switch custom-switch-v1 mb-2">
+                                            <input type="checkbox" id="envelope-reminder-alert" class="form-check-input input-primary" disabled/>
+                                            <label id="envelope-reminder-alert-label" class="form-check-label fs-5" for="envelope-reminder-alert"></label>
+                                        </div>
+
+                                        <hr class="my-3">
+
+                                        <h5 class="mb-3">Next Reminder Date</h5>
+                                        <h4 id="envelope-next-reminder-date" class="mb-3 fw-normal fs-5 text-muted"></h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-xl-4">
+                                <div class="card shadow-none border">
+                                    <div class="card-body">
+                                        <h5 class="mb-3">Delivery Status</h5>
+                                        <div class="mb-2">
+                                            <h4><span id="envelope-delivery-status" class="badge bg-light-primary"></span></h4>
+                                        </div>
+
+                                        <hr class="my-3">
+
+                                        <h5 class="mb-3">Sent Date</h5>
+                                        <h4 id="envelope-sent-date" class="mb-3 fw-normal fs-5 text-muted"></h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
                         <div class="row g-3">
                             <div class="col-md-6 col-xl-4">
                                 <div class="card shadow-none border mb-0">
                                     <div class="card-body">
                                         <h5 class="mb-3">Created By</h5>
-                                        <p class="mb-3" id="envelope-creator"></p>
+                                        <h4 id="envelope-creator" class="mb-3 fw-normal fs-5 text-muted"></h4>
                                     </div>
                                 </div>
                             </div>
@@ -243,7 +296,7 @@
                                 <div class="card shadow-none border mb-0">
                                     <div class="card-body">
                                         <h5 class="mb-3">Created Date</h5>
-                                        <p class="mb-3" id="envelope-created-date"></p>
+                                        <h4 id="envelope-created-date" class="mb-3 fw-normal fs-5 text-muted"></h4>
                                     </div>
                                 </div>
                             </div>

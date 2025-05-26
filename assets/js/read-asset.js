@@ -277,7 +277,6 @@ $(document).ready(function() {
     $(document).on('click', '#addAssetValueModalButton', function () {
         var now= new Date();
         const currentDateISOWithoutZDateLocal = new Date(now.getTime()-now.getTimezoneOffset()*60000).toISOString().substring(0,16);
-
         $('#add_value_date').val(currentDateISOWithoutZDateLocal).attr('max', currentDateISOWithoutZDateLocal);
     });
 
@@ -308,8 +307,8 @@ $(document).ready(function() {
 
                     var now= new Date();
                     const currentDateISOWithoutZDateLocal = new Date(now.getTime()-now.getTimezoneOffset()*60000).toISOString().substring(0,19);
-
                     $('#update_value_date').attr('max', currentDateISOWithoutZDateLocal);
+
                     $('#valuation_id').val(valuation_id);
                 }
             }

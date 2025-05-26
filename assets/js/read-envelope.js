@@ -47,6 +47,64 @@ $(document).ready(function() {
                 $('#envelope-title').html(data.title);
                 $('#envelope-description').html(data.description);
 
+                // word.charAt(0).toUpperCase()
+                // + word.slice(1)
+                $('#envelope-frequency').html(data.alert_frequency.charAt(0).toUpperCase() + data.alert_frequency.slice(1));
+
+                if (data.scheduled_send_at === null) {
+                    $('#envelope-scheduled-send-date').html('N/A');
+                } else {
+                    $('#envelope-scheduled-send-date').html(new Date(data.scheduled_send_at.substring(0, data.scheduled_send_at.length - 1)).toLocaleString('en-US', {
+                        year: 'numeric',
+                        weekday: 'long',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: 'numeric',
+                        minute: 'numeric',
+                        second: 'numeric',
+                        hour12: false,
+                    }));
+                }
+
+                if (data.reminder_status === 'disabled') {
+                    $('#envelope-reminder-alert').prop('checked', false);
+                } else {
+                    $('#envelope-reminder-alert').prop('checked', true);
+                }
+                $('#envelope-reminder-alert-label').html(data.reminder_status.charAt(0).toUpperCase() + data.reminder_status.slice(1));
+
+                if (data.next_alert_at === null) {
+                    $('#envelope-next-reminder-date').html('N/A');
+                } else {
+                    $('#envelope-next-reminder-date').html(new Date(data.next_alert_at.substring(0, data.next_alert_at.length - 1)).toLocaleString('en-US', {
+                        year: 'numeric',
+                        weekday: 'long',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: 'numeric',
+                        minute: 'numeric',
+                        second: 'numeric',
+                        hour12: false,
+                    }));
+                }
+
+                $('#envelope-delivery-status').html(data.delivery_status.charAt(0).toUpperCase() + data.delivery_status.slice(1));
+
+                if (data.sent_at === null) {
+                    $('#envelope-sent-date').html('N/A');
+                } else {
+                    $('#envelope-sent-date').html(new Date(data.sent_at.substring(0, data.sent_at.length - 1)).toLocaleString('en-US', {
+                        year: 'numeric',
+                        weekday: 'long',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: 'numeric',
+                        minute: 'numeric',
+                        second: 'numeric',
+                        hour12: false,
+                    }));
+                }
+
                 $('#envelope-creator').html(data.creator.first_name + ' ' + data.creator.last_name);
                 $('#envelope-created-date').html(new Date(data.created_at.substring(0, data.created_at.length - 1)).toLocaleString('en-US', {
                     year: 'numeric',
@@ -121,7 +179,7 @@ $(document).ready(function() {
                         .append($('<h6>', { class: 'mb-0', text: data[key].asset.name }))
                         .append(
                             $('<p>', { class: 'text-muted mb-0' }).append(
-                                $('<small>', { text: data[key].asset.current_value })
+                                $('<small>', { text: data[key].asset.current_value +' '+ data[key].asset.currency.code })
                             )
                         );
 

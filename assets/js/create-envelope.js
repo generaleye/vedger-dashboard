@@ -9,6 +9,52 @@ $(document).ready(function() {
         return domain_parts.join('.');
     }
 
+    function loadOnceFrequencyInitialDate() {
+        var now= new Date();
+        let currentDateISOWithoutZDateLocal = new Date(now.getTime()-now.getTimezoneOffset()*60000);
+        currentDateISOWithoutZDateLocal.setDate(currentDateISOWithoutZDateLocal.getDate())
+        currentDateISOWithoutZDateLocal = currentDateISOWithoutZDateLocal.toISOString().substring(0,16);
+        $('#scheduled_send_date').val(currentDateISOWithoutZDateLocal).attr('min', currentDateISOWithoutZDateLocal);
+    }
+    function frequencyChangeListener() {
+        $('#envelope_frequency').change(
+            function(){
+                var now= new Date();
+                var days = 1;
+                if ($(this).val() === 'once') {
+                    days = 1;
+                    $( "#scheduled_send_date" ).prop( "disabled", false );
+                } else if ($(this).val() === 'monthly') {
+                    days = 30;
+                    $( "#scheduled_send_date" ).prop( "disabled", true );
+                } else if ($(this).val() === 'quarterly') {
+                    days = 90;
+                    $( "#scheduled_send_date" ).prop( "disabled", true );
+                } else if ($(this).val() === 'yearly') {
+                    days = 365;
+                    $( "#scheduled_send_date" ).prop( "disabled", true );
+                }
+
+                let currentDateISOWithoutZDateLocal = new Date(now.getTime()-now.getTimezoneOffset()*60000);
+                currentDateISOWithoutZDateLocal.setDate(currentDateISOWithoutZDateLocal.getDate() + days)
+                currentDateISOWithoutZDateLocal = currentDateISOWithoutZDateLocal.toISOString().substring(0,16);
+                $('#scheduled_send_date').val(currentDateISOWithoutZDateLocal).attr('min', currentDateISOWithoutZDateLocal);
+            }
+        );
+    }
+
+    function reminderSwitchListener() {
+        $('#envelope_reminder_alert').change(
+            function(){
+                if ($(this).is(':checked')) {
+                    $('#envelope_reminder_alert_label').html('Reminder Alerts Enabled');
+                } else {
+                    $('#envelope_reminder_alert_label').html('Reminder Alerts Disabled');
+                }
+            }
+        );
+    }
+
     function loadAssets() {
         var token = sessionStorage.getItem('access_token');
 
@@ -81,6 +127,9 @@ $(document).ready(function() {
         });
     }
 
+    loadOnceFrequencyInitialDate();
+    frequencyChangeListener();
+    reminderSwitchListener();
     loadAssets();
     loadContacts();
 
@@ -91,6 +140,9 @@ $(document).ready(function() {
 
         var $envelope_title = $('#envelope_title').val();
         var $envelope_description = $('#envelope_description').val();
+        var $envelope_frequency = $('#envelope_frequency').val();
+        var $scheduled_send_date = $('#scheduled_send_date').val();
+        var $reminder_alert = $('#envelope_reminder_alert').is(":checked");
         var $envelope_assets = $('#envelope_assets').val();
         var $envelope_contacts = $('#envelope_contacts').val();
 
@@ -122,6 +174,9 @@ $(document).ready(function() {
                 data: {
                     title: $envelope_title,
                     description: $envelope_description,
+                    frequency: $envelope_frequency,
+                    scheduled_send_date: $scheduled_send_date,
+                    reminder_alert: $reminder_alert ? "enabled" : "disabled",
                     assets: $envelope_assets,
                     contacts: $envelope_contacts
                 },

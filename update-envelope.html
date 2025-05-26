@@ -185,32 +185,49 @@
 
     <!-- [ Main Content ] start -->
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col-md-12">
         <div id="message-container"></div>
         <div class="card">
           <div class="card-body">
             <form id="update-envelope-form">
               <div class="card shadow-none border">
-                <div class="card-header">
-                  <div class="d-flex align-items-center">
-                    <div class="flex-grow-1 mx-3">
-                      <div class="col-md-6">
-                        <div class="mb-3">
-                          <h5 class="mb-2">Title</h5>
-                          <input type="text" class="form-control" id="envelope_title" name="envelope_title" placeholder="Enter envelope title" required>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
                 <div class="card-body">
                   <div class="row g-3">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="envelope_title" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="envelope_title" name="envelope_title" placeholder="Enter envelope title" required>
+                      </div>
+                    </div>
                     <div class="col-md-12">
-                      <div class="card shadow-none border mb-0">
-                        <div class="card-body">
+                      <div class="mb-3">
+                        <label for="envelope_description" class="form-label">Description</label>
+                        <textarea class="form-control" id="envelope_description" name="envelope_description" required></textarea>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="row align-items-center">
+                        <div class="col-md-4">
                           <div class="mb-3">
-                            <h5 class="mb-2">Description</h5>
-                            <textarea class="form-control" id="envelope_description" name="envelope_description" required></textarea>
+                            <label for="envelope_frequency" class="form-label">Frequency</label>
+                            <select id="envelope_frequency" class="form-control">
+                              <option value="once">Once</option>
+                              <option value="monthly">Monthly</option>
+                              <option value="quarterly">Quarterly</option>
+                              <option value="yearly">Yearly</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="mb-3">
+                            <label for="scheduled_send_date" class="form-label">Scheduled Send Date</label>
+                            <input type="datetime-local" class="form-control" id="scheduled_send_date" aria-describedby="" placeholder="Enter date you want the envelope to be sent">
+                          </div>
+                        </div>
+                        <div class="col-md-4 d-flex justify-content-center">
+                          <div class="form-check form-switch custom-switch-v1 form-check-inline switch-lg mb-3">
+                            <label for="envelope_reminder_alert" id="envelope_reminder_alert_label" class="form-check-label"></label>
+                            <input type="checkbox" id="envelope_reminder_alert" class="form-check-input input-primary"/>
                           </div>
                         </div>
                       </div>
@@ -219,9 +236,9 @@
                 </div>
               </div>
               <div class="col-12 text-end btn-page">
-              <a class="btn btn-outline-secondary" id="cancel-update-button">Cancel</a>
-              <input type="submit" id="submit" class="btn btn-primary btn-md" value="Update">
-            </div>
+                <a class="btn btn-outline-secondary" id="cancel-update-button">Cancel</a>
+                <input type="submit" id="submit" class="btn btn-primary btn-md" value="Update">
+              </div>
             </form>
           </div>
         </div>
