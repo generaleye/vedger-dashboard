@@ -40,6 +40,33 @@ $(document).ready(function() {
         });
     }
 
+    // Function to update last seen at date
+    function updateLastSeen() {
+        // Retrieve token from session storage
+        var token = sessionStorage.getItem('access_token');
+        if (!token) {
+            // Redirect to login page
+            window.location.href = './account/login';
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: protocol + '//api.' + base_domain + '/v1/users/last-seen-at',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+            },
+            error: function(response) {
+                console.log('login-check: failed')
+                sessionStorage.clear();
+                // Redirect to login page
+                window.location.href = './account/login';
+            },
+            success: function (response) {
+            }
+        });
+    }
+
     // Call the check login function when the page is loaded
     checkLogin();
+    updateLastSeen();
 });
