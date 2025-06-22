@@ -16,7 +16,7 @@ $(document).ready(function() {
     if (envelope_id) {
         loadEnvelope(envelope_id);
         frequencyChangeListener();
-        reminderSwitchListener();
+        switchListener();
     } else {
         window.location.href = './envelopes';
     }
@@ -67,6 +67,14 @@ $(document).ready(function() {
                     $('#envelope_reminder_alert_label').html('Reminder Alerts Disabled');
                 }
 
+                if (data.delivery_report === "enabled") {
+                    $('#envelope_delivery_report').prop('checked', true);
+                    $('#envelope_delivery_report_label').html('Delivery Report Enabled');
+                } else {
+                    $('#envelope_delivery_report').prop('checked', false);
+                    $('#envelope_delivery_report_label').html('Delivery Report Disabled');
+                }
+
                 var now= new Date();
                 const currentDateISOWithoutZDateLocal = new Date(now.getTime()-now.getTimezoneOffset()*60000).toISOString().substring(0,16);
                 $('#scheduled_send_date').attr('min', currentDateISOWithoutZDateLocal);
@@ -101,13 +109,23 @@ $(document).ready(function() {
         );
     }
 
-    function reminderSwitchListener() {
+    function switchListener() {
         $('#envelope_reminder_alert').change(
             function(){
                 if ($(this).is(':checked')) {
                     $('#envelope_reminder_alert_label').html('Reminder Alerts Enabled');
                 } else {
                     $('#envelope_reminder_alert_label').html('Reminder Alerts Disabled');
+                }
+            }
+        );
+
+        $('#envelope_delivery_report').change(
+            function(){
+                if ($(this).is(':checked')) {
+                    $('#envelope_delivery_report_label').html('Delivery Report Enabled');
+                } else {
+                    $('#envelope_delivery_report_label').html('Delivery Report Disabled');
                 }
             }
         );
@@ -127,6 +145,7 @@ $(document).ready(function() {
         var $envelope_frequency = $('#envelope_frequency').val();
         var $scheduled_send_date = $('#scheduled_send_date').val();
         var $reminder_alert = $('#envelope_reminder_alert').is(":checked");
+        var $delivery_report = $('#envelope_delivery_report').is(":checked");
 
         var token = sessionStorage.getItem('access_token');
 
@@ -142,6 +161,7 @@ $(document).ready(function() {
                 frequency: $envelope_frequency,
                 scheduled_send_date: $scheduled_send_date,
                 reminder_alert: $reminder_alert ? "enabled" : "disabled",
+                delivery_report: $delivery_report ? "enabled" : "disabled",
             },
             error: function(response) {
                 var err = JSON.parse(response.responseText);

@@ -90,6 +90,13 @@ $(document).ready(function() {
 
                 $('#envelope-delivery-status').html(data.delivery_status.charAt(0).toUpperCase() + data.delivery_status.slice(1));
 
+                if (data.delivery_report === 'disabled') {
+                    $('#envelope-delivery-report').prop('checked', false);
+                } else {
+                    $('#envelope-delivery-report').prop('checked', true);
+                }
+                $('#envelope-delivery-report-label').html(data.delivery_report.charAt(0).toUpperCase() + data.delivery_report.slice(1));
+                
                 if (data.sent_at === null) {
                     $('#envelope-sent-date').html('N/A');
                 } else {

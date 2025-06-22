@@ -143,6 +143,7 @@ $(document).ready(function() {
         var $envelope_frequency = $('#envelope_frequency').val();
         var $scheduled_send_date = $('#scheduled_send_date').val();
         var $reminder_alert = $('#envelope_reminder_alert').is(":checked");
+        var $delivery_report = $('#envelope_delivery_report').is(":checked");
         var $envelope_assets = $('#envelope_assets').val();
         var $envelope_contacts = $('#envelope_contacts').val();
 
@@ -177,6 +178,7 @@ $(document).ready(function() {
                     frequency: $envelope_frequency,
                     scheduled_send_date: $scheduled_send_date,
                     reminder_alert: $reminder_alert ? "enabled" : "disabled",
+                    delivery_report: $delivery_report ? "enabled" : "disabled",
                     assets: $envelope_assets,
                     contacts: $envelope_contacts
                 },
