@@ -47,13 +47,11 @@ $(document).ready(function() {
                     var sendWithoutZDate= new Date(sendAtWithoutZ);
 
                     var $envelope_row = $('<tr>');
-                    console.log('title: '+data[key].title.length);
                     if (data[key].title.length > 40) {
                         $envelope_row.append($('<td>').html(data[key].title.substring(0, 35) + ' ...'));
                     } else {
                         $envelope_row.append($('<td>').html(data[key].title));
                     }
-                    console.log('description: '+data[key].description.length);
                     if (data[key].description.length > 40) {
                         $envelope_row.append($('<td>').html(data[key].description.substring(0, 35) + ' ...'));
                     } else {
