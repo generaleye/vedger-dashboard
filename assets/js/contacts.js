@@ -40,8 +40,8 @@ $(document).ready(function() {
                 }
 
                 $.each(data, function (key) {
-                    var valuatedWithoutZ= data[key].created_at.substring(0,data[key].created_at.length-1);
-                    var valuatedWithoutZDate= new Date(valuatedWithoutZ);
+                    var creaatedWithoutZ= data[key].created_at.substring(0,data[key].created_at.length-1);
+                    var createdWithoutZDate= new Date(creaatedWithoutZ);
 
                     var $contact_row = $('<tr>');
                     $contact_row.append($('<td>').html(data[key].contact.first_name));
@@ -53,7 +53,7 @@ $(document).ready(function() {
                     } else {
                         $contact_row.append($('<td>').html(data[key].description));
                     }
-                    $contact_row.append($('<td>').html(valuatedWithoutZDate.toLocaleDateString() + ' <span class="text-muted text-sm d-block">' + valuatedWithoutZDate.toLocaleTimeString() + '</span>'));
+                    $contact_row.append($('<td>').html(createdWithoutZDate.toLocaleDateString() + ' <span class="text-muted text-sm d-block">' + createdWithoutZDate.toLocaleTimeString() + '</span>'));
                     $contact_row.append($('<td>').addClass('text-end')
                         .html(
                             '<a class="avtar avtar-xs btn-link-secondary update-contact" id="' + data[key].id + '" href="update-contact.html?id=' + data[key].id + '" data-bs-toggle="modal" data-bs-target="#updateContactModal"><i class="ti ti-edit f-20"></i></a>' +

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- [Head] start -->
+<head>
+  <title>Subscription - Vedger</title>
+  <!-- [Meta] -->
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" name="viewport" />
+  <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- [Favicon] icon -->
+  <link href="assets/images/favicon.svg" rel="icon" type="image/x-icon" />
+
+  <!-- [Font] Family -->
+  <link href="assets/fonts/inter/inter.css" id="main-font-link" rel="stylesheet" />
+  <!-- [Tabler Icons] https://tablericons.com -->
+  <link href="assets/fonts/tabler-icons.min.css" rel="stylesheet" />
+  <!-- [Feather Icons] https://feathericons.com -->
+  <link href="assets/fonts/feather.css" rel="stylesheet" />
+  <!-- [Font Awesome Icons] https://fontawesome.com/icons -->
+  <link href="assets/fonts/fontawesome.css" rel="stylesheet" />
+  <!-- [Material Icons] https://fonts.google.com/icons -->
+  <link href="assets/fonts/material.css" rel="stylesheet" />
+  <!-- [Template CSS Files] -->
+  <link href="assets/css/style.css" id="main-style-link" rel="stylesheet" />
+  <link href="assets/css/style-preset.css" rel="stylesheet" />
+</head>
+<!-- [Head] end -->
+<!-- [Body] Start -->
+<body data-pc-direction="ltr" data-pc-layout="vertical" data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-theme="light" data-pc-theme_contrast="true">
+<!-- [ Pre-loader ] start -->
+<div class="page-loader">
+  <div class="bar"></div>
+</div>
+<!-- [ Pre-loader ] End -->
+<!-- [ Sidebar Menu ] start -->
+<nav class="pc-sidebar">
+  <div class="navbar-wrapper">
+    <div class="m-header">
+      <a class="b-brand text-primary" href="home.html">
+        <img alt="logo" class="img-fluid logo-md" src="assets/images/logo.svg" />
+      </a>
+    </div>
+    <div class="navbar-content">
+      <ul class="pc-navbar">
+        <li class="pc-item pc-caption">
+          <label>Navigation</label>
+        </li>
+        <li class="pc-item">
+          <a class="pc-link" href="home.html">
+            <span class="pc-micon">
+              <i class="ti ti-home"></i>
+            </span>
+            <span class="pc-mtext">Home</span>
+          </a>
+        </li>
+        <li class="pc-item">
+          <a class="pc-link" href="contacts.html">
+              <span class="pc-micon">
+                <i class="ti ti-users" style="height: 50px"></i>
+              </span>
+            <span class="pc-mtext">Contacts</span>
+          </a>
+        </li>
+        <li class="pc-item">
+          <a class="pc-link" href="envelopes.html">
+              <span class="pc-micon">
+                <i class="ti ti-mail"></i>
+              </span>
+            <span class="pc-mtext">Envelopes</span>
+          </a>
+        </li>
+        <li class="pc-item active">
+          <a class="pc-link" href="./subscription.html">
+            <span class="pc-micon">
+              <i class="ti ti-calendar-time"></i>
+            </span>
+            <span class="pc-mtext">Subscription</span>
+          </a>
+        </li>
+        <li class="pc-item">
+          <a class="pc-link" href="./profile.html">
+            <span class="pc-micon">
+              <i class="ti ti-user"></i>
+            </span>
+            <span class="pc-mtext">Profile</span>
+          </a>
+        </li>
+        <li class="pc-item">
+          <a class="pc-link" href="settings.html">
+            <span class="pc-micon">
+              <i class="ti ti-settings"></i>
+            </span>
+            <span class="pc-mtext">Settings</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- [ Sidebar Menu ] end -->
+<!-- [ Header Topbar ] start -->
+<header class="pc-header">
+  <div class="header-wrapper"> <!-- [Mobile Media Block] start -->
+    <div class="me-auto pc-mob-drp">
+      <ul class="list-unstyled">
+        <!-- ======= Menu collapse Icon ===== -->
+        <li class="pc-h-item pc-sidebar-collapse">
+          <a class="pc-head-link ms-0" href="#" id="sidebar-hide">
+            <i class="ti ti-menu-2"></i>
+          </a>
+        </li>
+        <li class="pc-h-item pc-sidebar-popup">
+          <a class="pc-head-link ms-0" href="#" id="mobile-collapse">
+            <i class="ti ti-menu-2"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- [Mobile Media Block end] -->
+    <div class="ms-auto">
+      <ul class="list-unstyled">
+        <li class="dropdown pc-h-item header-user-profile">
+          <a aria-expanded="false" aria-haspopup="false" class="pc-head-link dropdown-toggle arrow-none me-0"
+            data-bs-auto-close="outside" data-bs-toggle="dropdown" href="#" role="button">
+            <img alt="user-image" class="user-avtar" src="assets/images/user/user-avatar.svg" />
+          </a>
+          <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
+            <div class="dropdown-body">
+              <div class="profile-notification-scroll position-relative" style="max-height: calc(100vh - 225px)">
+                <div class="d-flex mb-1">
+                  <div class="flex-shrink-0">
+                    <img alt="user-image" class="user-avtar wid-35" src="assets/images/user/user-avatar.svg" />
+                  </div>
+                  <div class="flex-grow-1 ms-3">
+                    <h6 class="mb-1" id="nav-profile-name"></h6>
+                    <span id="nav-profile-email"></span>
+                  </div>
+                </div>
+                <hr class="border-secondary border-opacity-50" />
+                <a class="dropdown-item" href="profile.html">
+                  <span>
+                    <i class="ti ti-user"></i>
+                    <span>Profile</span>
+                  </span>
+                </a>
+                <a class="dropdown-item" href="settings.html">
+                  <span>
+                    <i class="ti ti-settings"></i>
+                    <span>Settings</span>
+                  </span>
+                </a>
+                <hr class="border-secondary border-opacity-50" />
+                <div class="d-grid mb-3">
+                  <a class="btn btn-primary" href="account/logout.html">
+                    <i class="ti ti-logout"></i>
+                    Logout
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- [ Header ] end -->
+
+<!-- [ Main Content ] start -->
+<div class="pc-container">
+  <div class="pc-content">
+    <!-- [ breadcrumb ] start -->
+    <div class="page-header">
+      <div class="page-block">
+        <div class="row align-items-center">
+          <div class="col-md-12">
+            <div class="page-header-title">
+              <h2 class="mb-0">Subscription</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-auto">
+        <div class="nav-price">
+          Last Active: <span id="countUpTimer">0d 0h 0m 0s</span>
+        </div>
+      </div>
+    </div>
+    <!-- [ breadcrumb ] end -->
+
+    <!-- [ Main Content ] start -->
+
+    <div class="row">
+      <!-- [ sample-page ] start -->
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-body py-0">
+            <ul class="nav nav-tabs profile-tabs" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="subscription-tab-1" data-bs-toggle="tab" href="#subscription-1" role="tab" aria-selected="true">
+                  <i class="ti ti-box-multiple me-2"></i>Plans
+                </a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="subscription-tab-2" data-bs-toggle="tab" href="#subscription-2" role="tab" aria-selected="false" tabindex="-1">
+                  <i class="ti ti-history me-2"></i>Subscription History
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="tab-content">
+          <div class="tab-pane active show" id="subscription-1" role="tabpanel" aria-labelledby="subscription-tab-1">
+
+            <div class="row">
+              <div class="col-lg-4 col-xxl-3">
+                <div class="card">
+                  <div class="card-body position-relative">
+                    <div class="text-center mt-3">
+                      <h5 class="mb-0" id="subscription-plan"></h5>
+                      <p class="text-muted text-sm">Current Subscription</p>
+                      <hr class="my-3 border border-secondary-subtle">
+                      <div class="row g-3">
+                        <div class="col-6">
+                          <h5 class="mb-0" id="subscription-start-at"></h5>
+                          <small class="text-muted">Start Date</small>
+                        </div>
+                        <div class="col-6">
+                          <h5 class="mb-0" id="subscription-end-at"></h5>
+                          <small class="text-muted">End Date</small>
+                        </div>
+                        <div class="col-6">
+                          <h5 class="mb-0" id="subscription-frequency"></h5>
+                          <small class="text-muted">Frequency</small>
+                        </div>
+                        <div class="col-6">
+                          <h5 class="mb-0" id="subscription-auto-renew"></h5>
+                          <small class="text-muted">Auto Renew</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-8 col-xxl-9">
+                <div class="card">
+                  <div class="card-header">
+                    <div class="row align-items-center">
+                      <div class="col">
+                        <h5>Change Subscription</h5>
+                      </div>
+<!--                      <h5 class="mb-0">My Envelopes</h5>-->
+                      <div class="col-auto">
+
+                        <ul class="nav nav-pills nav-price justify-content-end" id="pills-tab" role="tablist">
+                          <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-monthly-tab" data-bs-toggle="pill" data-bs-target="#pills-monthly" type="button" role="tab" aria-controls="pills-monthly" aria-selected="false">Monthly</button>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="pills-yearly-tab" data-bs-toggle="pill" data-bs-target="#pills-yearly" type="button" role="tab" aria-controls="pills-yearly" aria-selected="true">Yearly <span class="badge bg-primary ms-2">Save 18%</span></button>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="card-body">
+
+                    <div class="tab-content" id="pills-tabContent">
+                      <div class="tab-pane fade" id="pills-monthly" role="tabpanel" aria-labelledby="pills-monthly-tab" tabindex="0">
+                        <div class="row justify-content-center align-items-center">
+                          <!-- [ sample-page ] start -->
+                          <div class="col-md-6 col-lg-4">
+                            <div class="card price-card">
+                              <div class="card-body">
+                                <div class="price-head">
+                                  <h5 class="mb-0">Basic</h5>
+                                  <div class="price-price mt-4">₦0 <span class="text-muted"> Monthly</span></div>
+                                  <div class="d-grid"><button id="basic-monthly" class="btn btn-outline-secondary mt-4 basic" onclick="downgrade()"></button></div>
+                                </div>
+                                <ul class="list-group list-group-flush product-list">
+                                  <li class="list-group-item enable">Up to 10 Assets</li>
+                                  <li class="list-group-item enable">1 Contact</li>
+                                  <li class="list-group-item enable">1 Envelope</li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-6 col-lg-4">
+                            <div class="card price-card price-popular">
+                              <div class="card-body">
+                                <div class="price-head">
+                                  <span class="badge f-12 bg-success mb-3">Popular</span>
+                                  <h5 class="mb-0">Standard</h5>
+                                  <div class="price-price mt-4">₦1500 <span class="text-muted"> Monthly</span></div>
+                                  <div class="d-grid"><button id="standard-monthly" class="btn btn-primary mt-4 standard" ></button></div>
+                                </div>
+                                <ul class="list-group list-group-flush product-list">
+                                  <li class="list-group-item enable">Up to 30 Assets</li>
+                                  <li class="list-group-item enable">3 Contacts</li>
+                                  <li class="list-group-item enable">3 Envelopes</li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="tab-pane fade show active" id="pills-yearly" role="tabpanel" aria-labelledby="pills-yearly-tab" tabindex="0">
+                        <div class="row justify-content-center align-items-center">
+                          <!-- [ sample-page ] start -->
+                          <div class="col-md-6 col-lg-4">
+                            <div class="card price-card">
+                              <div class="card-body">
+                                <div class="price-head">
+                                  <h5 class="mb-0">Basic</h5>
+                                  <div class="price-price mt-4">₦0 <span class="text-muted"> Yearly</span></div>
+                                  <div class="d-grid"><button id="basic-yearly" class="btn btn-outline-secondary mt-4 basic" onclick="downgrade()"></button></div>
+                                </div>
+                                <ul class="list-group list-group-flush product-list">
+                                  <li class="list-group-item enable">Up to 10 Assets</li>
+                                  <li class="list-group-item enable">1 Contact</li>
+                                  <li class="list-group-item enable">1 Envelope</li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-6 col-lg-4">
+                            <div class="card price-card price-popular">
+                              <div class="card-body">
+                                <div class="price-head">
+                                  <span class="badge f-12 bg-success mb-3">Popular</span>
+                                  <h5 class="mb-0">Standard</h5>
+                                  <div class="price-price mt-4">₦15000 <span class="text-muted"> Yearly</span></div>
+                                  <div class="d-grid"><button id="standard-yearly" class="btn btn-primary mt-4 standard" ></button></div>
+                                </div>
+                                <ul class="list-group list-group-flush product-list">
+                                  <li class="list-group-item enable">Up to 30 Assets</li>
+                                  <li class="list-group-item enable">3 Contacts</li>
+                                  <li class="list-group-item enable">3 Envelopes</li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="tab-pane" id="subscription-2" role="tabpanel" aria-labelledby="subscription-tab-2">
+            <div class="row">
+              <div class="col-12">
+                <div class="card table-card">
+                  <div class="card-header d-flex align-items-center justify-content-between py-3">
+                    <h5 class="mb-0">Subscription History</h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-hover" id="pc-dt-simple">
+                        <thead>
+                        <tr>
+                          <th>Plan</th>
+                          <th>Frequency</th>
+                          <th>Start Date</th>
+                          <th>End Date</th>
+                          <th>Amount</th>
+                          <th>Payment Status</th>
+                          <th>Date Created</th>
+                          <th class="text-end">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody id="subscription-container">
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- [ sample-page ] end -->
+    </div>
+
+    <!-- [ Main Content ] end -->
+
+  </div>
+
+  <!--  [ Add Contact Modal ] start -->
+  <div id="createSubscriptionModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createSubscriptionModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="createSubscriptionModalLabel">Pay</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div id="create-subscription-message-container"></div>
+        <form id="create-subscription">
+          <div class="modal-body ">
+            <div class="mb-3">
+              <label for="create_subscription_reference" class="form-label">Reference</label>
+              <input type="text" class="form-control" id="create_subscription_reference" aria-describedby="" placeholder="Reference" disabled>
+            </div>
+            <div class="mb-3">
+              <label for="create_subscription_plan" class="form-label">Plan</label>
+              <input type="text" class="form-control" id="create_subscription_plan" aria-describedby="" placeholder="Plan" disabled>
+            </div>
+            <div class="mb-3">
+              <label for="create_subscription_frequency" class="form-label">Frequency</label>
+              <input type="text" class="form-control" id="create_subscription_frequency" aria-describedby="" placeholder="Frequency" disabled>
+            </div>
+            <div class="mb-3">
+              <label for="create_subscription_start_date" class="form-label">Start Date</label>
+              <input type="text" class="form-control" id="create_subscription_start_date" aria-describedby="" placeholder="Start Date" disabled>
+            </div>
+            <div class="mb-3">
+              <label for="create_subscription_end_date" class="form-label">End Date</label>
+              <input type="text" class="form-control" id="create_subscription_end_date" aria-describedby="" placeholder="End Date" disabled>
+            </div>
+            <div class="mb-3">
+              <label for="create_subscription_amount" class="form-label">Amount</label>
+              <input type="text" class="form-control" id="create_subscription_amount" aria-describedby="" placeholder="Amount" disabled>
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <input id="subscription_uuid" name="subscription_uuid" type="hidden" value="">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <input type="submit" id="pay" class="btn btn-primary btn-md" value="Pay Now">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!--  [ Add Contact Modal ] end -->
+</div>
+<!-- [ Main Content ] end -->
+<footer class="pc-footer">
+  <div class="footer-wrapper container-fluid">
+    <div class="row">
+      <div class="col my-1">
+        <p class="m-0">&copy;2025 Vedger</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- [Page Specific JS] start -->
+<!-- [Page Specific JS] end -->
+<!-- Required Js -->
+<script src="assets/js/plugins/popper.min.js"></script>
+<script src="assets/js/plugins/simplebar.min.js"></script>
+<script src="assets/js/plugins/bootstrap.min.js"></script>
+<script src="assets/js/plugins/jquery-3.7.1.min.js"></script>
+<script src="assets/js/check-login.js"></script>
+<script src="assets/js/subscription.js"></script>
+<script src="assets/js/fonts/custom-font.js"></script>
+<script src="assets/js/theme.js"></script>
+<script src="assets/js/plugins/feather.min.js"></script>
+<script src="assets/js/custom/count-up-timer.js"></script>
+
+</body>
+<!-- [Body] end -->
+</html>

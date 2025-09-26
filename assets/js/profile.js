@@ -23,7 +23,7 @@ $(document).ready(function() {
             beforeSend: function(xhr) {
                 xhr.setRequestHeader('Authorization', 'Bearer ' + token);
             },
-            error: function(response) {
+            error: function() {
                 window.location.href = './home';
             },
             success: function (response) {
@@ -34,6 +34,8 @@ $(document).ready(function() {
 
                 $('#profile-no-of-assets').html(data.no_of_assets);
                 $('#profile-net-worth').html(parseFloat(data.net_worth).toLocaleString() + ' ' + data.preferred_currency.code);
+                $('#profile-no-of-contacts').html(data.no_of_contacts);
+                $('#profile-no-of-envelopes').html(data.no_of_envelopes);
 
                 $('.profile-first-name').html(data.first_name).val(data.first_name);
                 $('.profile-last-name').html(data.last_name).val(data.last_name);
@@ -57,11 +59,9 @@ $(document).ready(function() {
 
                 var update_profile_preferred_currency = $('#update-profile-preferred-currency');
 
-                $.each(data, function (key, value) {
+                $.each(data, function (key) {
                     var $currency_option = $('<option>').html(data[key].code + ' - ' + data[key].full_name).val(data[key].id);
                     update_profile_preferred_currency.append($currency_option);
-
-                    // updateCurr.append(new Option(data[key].code + ' - ' + data[key].full_name, data[key].id));
                 });
             }
         });

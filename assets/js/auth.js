@@ -9,6 +9,16 @@ $(document).ready(function() {
         return domain_parts.join('.');
     }
 
+    redirectIfLoggedIn();
+
+    function redirectIfLoggedIn(){
+        var $access_token = sessionStorage.getItem('access_token');
+
+        if ($access_token !== null) {
+            window.location.href = '../home';
+        }
+    }
+
     $('#signup-form').on('submit', function(event) {
         event.preventDefault();
         $('#message-container').html('');

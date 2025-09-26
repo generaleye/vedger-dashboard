@@ -32,15 +32,14 @@ $(document).ready(function() {
 
                 if (data.length === 0) {
                     var $asset_row = $('<tr>');
-                    $asset_row.append($('<td>').addClass('text-center').attr('colspan', 5)
+                    $asset_row.append($('<td>').addClass('text-center').attr('colspan', 6)
                         .html('No Data Available')
                     );
 
                     $('#asset-container').append($asset_row);
                 }
 
-                // var asset_row = $('<tr>');
-                $.each(data, function (key, value) {
+                $.each(data, function (key) {
                     var valuatedWithoutZ= data[key].created_at.substring(0,data[key].created_at.length-1);
                     var valuatedWithoutZDate= new Date(valuatedWithoutZ);
 

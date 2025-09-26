@@ -90,7 +90,7 @@ $(document).ready(function() {
 
                 var asset_currency = $('#asset_currency');
 
-                $.each(data, function (key, value) {
+                $.each(data, function (key) {
                     var $currency_option = $('<option>').html(data[key].code + ' - ' + data[key].full_name).val(data[key].id);
                     asset_currency.append($currency_option);
                 });
