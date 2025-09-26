@@ -68,7 +68,7 @@ $(document).ready(function() {
             beforeSend: function(xhr) {
                 xhr.setRequestHeader('Authorization', 'Bearer ' + token);
             },
-            error: function(response) {
+            error: function() {
                 window.location.href = './home';
             },
             success: function (response) {

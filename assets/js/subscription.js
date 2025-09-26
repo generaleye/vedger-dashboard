@@ -64,10 +64,10 @@ $(document).ready(function() {
 
     $(function(){
         $(".standard").click(function(){
-            var $selected = $(this).attr('id');
-            var $frequency = 'monthly';
-            if ($selected === 'standard-yearly') {
-                $frequency = 'yearly';
+            var selected = $(this).attr('id');
+            var frequency = 'monthly';
+            if (selected === 'standard-yearly') {
+                frequency = 'yearly';
             }
 
             var token = sessionStorage.getItem('access_token');
@@ -79,7 +79,7 @@ $(document).ready(function() {
                 },
                 data: {
                     plan_pricing_id: 1,
-                    frequency: $frequency
+                    frequency: frequency
                 },
                 error: function(response) {
                     var err = JSON.parse(response.responseText);
@@ -103,7 +103,6 @@ $(document).ready(function() {
                         $('#create_subscription_amount').val(data.amount + ' ' + data.currency.code);
 
                         $("#createSubscriptionModal").modal("show");
-                        // window.location.href = './read-envelope.html?id='+response.data.uuid;
                     }
                 }
             });
@@ -175,8 +174,8 @@ $(document).ready(function() {
                 }
 
                 $.each(data, function (key) {
-                    var creaatedWithoutZ= data[key].created_at.substring(0,data[key].created_at.length-1);
-                    var createdWithoutZDate= new Date(creaatedWithoutZ);
+                    var createdWithoutZ= data[key].created_at.substring(0,data[key].created_at.length-1);
+                    var createdWithoutZDate= new Date(createdWithoutZ);
 
                     var $subscription_row = $('<tr>');
                     $subscription_row.append($('<td>').html(data[key].plan.name));
