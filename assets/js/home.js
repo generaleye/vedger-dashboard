@@ -1,18 +1,13 @@
 $(document).ready(function() {
     const protocol = $(location).attr('protocol');
-    const base_domain = getBaseDomain();
+    const base_domain = Init.getBaseDomain();
 
-    function getBaseDomain() {
-        const hostname = $(location).attr('hostname');
-        const domain_parts = hostname.split('.');
-        domain_parts.shift();
-        return domain_parts.join('.');
-    }
+    // Call the check login function when the page is loaded
+    loadAssets();
 
     // Function to handle login checks
     function loadAssets() {
-        // Retrieve token from session storage
-        var token = sessionStorage.getItem('access_token');
+        const token = Init.getToken();
 
         $.ajax({
             type: 'GET',
@@ -22,7 +17,7 @@ $(document).ready(function() {
             },
             error: function(response) {
                 var err = JSON.parse(response.responseText);
-                var errorHtml = generateErrorHtml(err.message);
+                var errorHtml = Init.generateErrorHtml(err.message);
                 $('#message-container').html(errorHtml);
             },
             success: function (response) {
@@ -40,14 +35,13 @@ $(document).ready(function() {
                 }
 
                 $.each(data, function (key) {
-                    var valuatedWithoutZ= data[key].created_at.substring(0,data[key].created_at.length-1);
-                    var valuatedWithoutZDate= new Date(valuatedWithoutZ);
+                    var valuatedAt= new Date(data[key].created_at);
 
                     var $asset_row = $('<tr>');
                     $asset_row.append($('<td>').html(data[key].name));
                     $asset_row.append($('<td>').html(data[key].type.name));
                     $asset_row.append($('<td>').html(parseFloat(data[key].current_value).toLocaleString() + ' ' + data[key].currency.code ?? '-').prop('title', parseFloat(data[key].preferred_current_value).toLocaleString() + ' ' + data[key].preferred_currency.code));
-                    $asset_row.append($('<td>').html(valuatedWithoutZDate.toLocaleDateString() + ' <span class="text-muted text-sm d-block">' + valuatedWithoutZDate.toLocaleTimeString() + '</span>'));
+                    $asset_row.append($('<td>').html(valuatedAt.toLocaleDateString() + ' <span class="text-muted text-sm d-block">' + valuatedAt.toLocaleTimeString() + '</span>'));
                     if (data[key].description.length > 80) {
                         $asset_row.append($('<td>').html(data[key].description.substring(0, 75) + ' ...'));
                     } else {
@@ -67,14 +61,10 @@ $(document).ready(function() {
         });
     }
 
-    // Call the check login function when the page is loaded
-    loadAssets();
-
-
     $(document).on('click', '.delete-asset', function () {
         var confirm_delete = confirm('Are you sure you want to delete this asset?');
         if(confirm_delete){
-            var token = sessionStorage.getItem('access_token');
+            const token = Init.getToken();
             var asset_id = this.id;
 
             $.ajax({

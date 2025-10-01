@@ -1,16 +1,9 @@
 $(document).ready(function() {
     const protocol = $(location).attr('protocol');
-    const base_domain = getBaseDomain();
-
-    function getBaseDomain() {
-        const hostname = $(location).attr('hostname');
-        const domain_parts = hostname.split('.');
-        domain_parts.shift();
-        return domain_parts.join('.');
-    }
+    const base_domain = Init.getBaseDomain();
 
     // Get the resource ID from the URL
-    const envelope_id = getIdFromUrl();
+    const envelope_id = Init.getIdFromUrl();
 
     // If the ID is present, fetch the resource details
     if (envelope_id) {
@@ -21,16 +14,9 @@ $(document).ready(function() {
         window.location.href = './envelopes';
     }
 
-    // Function to get the ID from the URL
-    function getIdFromUrl() {
-        const urlParams= new URLSearchParams(window.location.search);
-        return urlParams.get('id');
-    }
-
     // Function to load envelope
     function loadEnvelope(envelope_id) {
-        // Retrieve token from session storage
-        var token = sessionStorage.getItem('access_token');
+        const token = Init.getToken();
 
         $.ajax({
             type: 'GET',
@@ -44,11 +30,10 @@ $(document).ready(function() {
             success: function (response) {
                 var data = response.data;
 
-                var dateWithoutZ  =  data.scheduled_send_at.substring(0,data.scheduled_send_at.length-1);
-                var dateWithoutZDate = new Date(dateWithoutZ);
+                var scheduledSendAt = new Date(data.scheduled_send_at);
                 // Format Date object to HTML datetime-local string
                 const pad = (num) => String(num).padStart(2, '0');
-                const htmlDateTimeLocal = `${dateWithoutZDate.getFullYear()}-${pad(dateWithoutZDate.getMonth() + 1)}-${pad(dateWithoutZDate.getDate())}T${pad(dateWithoutZDate.getHours())}:${pad(dateWithoutZDate.getMinutes())}`;
+                const htmlDateTimeLocal = `${scheduledSendAt.getFullYear()}-${pad(scheduledSendAt.getMonth() + 1)}-${pad(scheduledSendAt.getDate())}T${pad(scheduledSendAt.getHours())}:${pad(scheduledSendAt.getMinutes())}`;
 
                 $('#envelope_title').val(data.title);
                 $('#envelope_description').val(data.description);
@@ -140,14 +125,14 @@ $(document).ready(function() {
         $('#message-container').html('');
         $('#submit').prop("disabled", true);
 
+        const token = Init.getToken();
+
         var $envelope_title = $('#envelope_title').val();
         var $envelope_description = $('#envelope_description').val();
         var $envelope_frequency = $('#envelope_frequency').val();
         var $scheduled_send_date = $('#scheduled_send_date').val();
         var $reminder_alert = $('#envelope_reminder_alert').is(":checked");
         var $delivery_report = $('#envelope_delivery_report').is(":checked");
-
-        var token = sessionStorage.getItem('access_token');
 
         $.ajax({
             type: 'PATCH',
@@ -165,7 +150,7 @@ $(document).ready(function() {
             },
             error: function(response) {
                 var err = JSON.parse(response.responseText);
-                var errorHtml = generateErrorHtml(err.message);
+                var errorHtml = Init.generateErrorHtml(err.message);
                 $('#message-container').html(errorHtml);
                 $('#submit').prop("disabled", false);
             },
@@ -173,7 +158,7 @@ $(document).ready(function() {
                 var $status = response.status;
 
                 if ($status === 'success') {
-                    var successHtml = generateSuccessHtml(response.message);
+                    var successHtml = Init.generateSuccessHtml(response.message);
                     $('#message-container').html(successHtml);
 
                     window.location.href = './read-envelope.html?id=' + envelope_id;
@@ -181,19 +166,4 @@ $(document).ready(function() {
             }
         });
     });
-
-    function generateSuccessHtml(message) {
-        return '<div class="alert alert-success alert-dismissible fade show" role="alert">' +
-            '   <div><i class="fas fa-check-circle"> </i> ' + message + '</div>' +
-            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
-            '</div>';
-    }
-
-    function generateErrorHtml(message) {
-        return '<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
-            '   <div><i class="fas fa-exclamation-triangle"> </i> ' + message + '</div>' +
-            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
-            '</div>';
-    }
-
 });

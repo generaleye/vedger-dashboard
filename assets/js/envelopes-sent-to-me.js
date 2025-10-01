@@ -1,18 +1,13 @@
 $(document).ready(function() {
     const protocol = $(location).attr('protocol');
-    const base_domain = getBaseDomain();
+    const base_domain = Init.getBaseDomain();
 
-    function getBaseDomain() {
-        const hostname = $(location).attr('hostname');
-        const domain_parts = hostname.split('.');
-        domain_parts.shift();
-        return domain_parts.join('.');
-    }
+    // Call the check login function when the page is loaded
+    loadEnvelopesSentToMe();
 
     // Function to handle loading envelopes
     function loadEnvelopesSentToMe() {
-        // Retrieve token from session storage
-        var token = sessionStorage.getItem('access_token');
+        const token = Init.getToken();
 
         $.ajax({
             type: 'GET',
@@ -22,7 +17,7 @@ $(document).ready(function() {
             },
             error: function(response) {
                 var err = JSON.parse(response.responseText);
-                var errorHtml = generateErrorHtml(err.message);
+                var errorHtml = Init.generateErrorHtml(err.message);
                 $('#message-container').html(errorHtml);
             },
             success: function (response) {
@@ -40,8 +35,7 @@ $(document).ready(function() {
                 }
 
                 $.each(data, function (key) {
-                    var sentAtWithoutZ= data[key].sent_at.substring(0,data[key].sent_at.length-1);
-                    var sentWithoutZDate= new Date(sentAtWithoutZ);
+                    var sentAt= new Date(data[key].sent_at);
 
                     var $envelope_row = $('<tr>');
                     if (data[key].title.length > 40) {
@@ -55,7 +49,7 @@ $(document).ready(function() {
                         $envelope_row.append($('<td>').html(data[key].description));
                     }
                     $envelope_row.append($('<td>').html(data[key].created_by));
-                    $envelope_row.append($('<td>').html(sentWithoutZDate.toLocaleDateString() + ' <span class="text-muted text-sm d-block">' + sentWithoutZDate.toLocaleTimeString() + '</span>'));
+                    $envelope_row.append($('<td>').html(sentAt.toLocaleDateString() + ' <span class="text-muted text-sm d-block">' + sentAt.toLocaleTimeString() + '</span>'));
                     $envelope_row.append($('<td>').addClass('text-end')
                         .html(
                             '<a class="avtar avtar-xs btn-link-secondary" href="read-envelope-sent-to-me.html?id=' + data[key].uuid + '"><i class="ti ti-eye f-20"></i></a>'
@@ -66,22 +60,5 @@ $(document).ready(function() {
                 });
             }
         });
-    }
-
-    // Call the check login function when the page is loaded
-    loadEnvelopesSentToMe();
-
-    function generateSuccessHtml(message) {
-        return '<div class="alert alert-success alert-dismissible fade show" role="alert">' +
-            '   <div><i class="fas fa-check-circle"> </i> ' + message + '</div>' +
-            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
-            '</div>';
-    }
-
-    function generateErrorHtml(message) {
-        return '<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
-            '   <div><i class="fas fa-exclamation-triangle"> </i> ' + message + '</div>' +
-            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
-            '</div>';
     }
 });

@@ -1,14 +1,14 @@
 $(document).ready(function() {
     const protocol = $(location).attr('protocol');
-    const hostname = $(location).attr('hostname');
-    const domain_parts = hostname.split('.');
-    domain_parts.shift();
-    const base_domain = domain_parts.join('.');
+    const base_domain = Init.getBaseDomain();
+
+    // Call the check login function when the page is loaded
+    checkLogin();
+    updateLastSeen();
 
     // Function to handle login checks
     function checkLogin() {
-        // Retrieve token from session storage
-        var token = sessionStorage.getItem('access_token');
+        const token = Init.getToken();
         if (!token) {
             // Redirect to login page
             window.location.href = './account/login';
@@ -21,7 +21,6 @@ $(document).ready(function() {
                 xhr.setRequestHeader('Authorization', 'Bearer ' + token);
             },
             error: function(response) {
-                console.log('login-check: failed')
                 sessionStorage.clear();
                 // Redirect to login page
                 window.location.href = './account/login';
@@ -42,8 +41,7 @@ $(document).ready(function() {
 
     // Function to update last seen at date
     function updateLastSeen() {
-        // Retrieve token from session storage
-        var token = sessionStorage.getItem('access_token');
+        const token = Init.getToken();
         if (!token) {
             // Redirect to login page
             window.location.href = './account/login';
@@ -55,18 +53,11 @@ $(document).ready(function() {
             beforeSend: function(xhr) {
                 xhr.setRequestHeader('Authorization', 'Bearer ' + token);
             },
-            error: function(response) {
-                console.log('login-check: failed')
-                sessionStorage.clear();
+            error: function() {
+                Init.clearToken();
                 // Redirect to login page
                 window.location.href = './account/login';
-            },
-            success: function (response) {
             }
         });
     }
-
-    // Call the check login function when the page is loaded
-    checkLogin();
-    updateLastSeen();
 });

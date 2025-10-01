@@ -1,16 +1,9 @@
 $(document).ready(function() {
     const protocol = $(location).attr('protocol');
-    const base_domain = getBaseDomain();
-
-    function getBaseDomain() {
-        const hostname = $(location).attr('hostname');
-        const domain_parts = hostname.split('.');
-        domain_parts.shift();
-        return domain_parts.join('.');
-    }
+    const base_domain = Init.getBaseDomain();
 
     // Get the resource ID from the URL
-    const subscription_id = getIdFromUrl();
+    const subscription_id = Init.getIdFromUrl();
 
     // If the ID is present, fetch the resource details
     if (subscription_id) {
@@ -19,16 +12,9 @@ $(document).ready(function() {
         window.location.href = './home';
     }
 
-    // Function to get the ID from the URL
-    function getIdFromUrl() {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get('id');
-    }
-
     // Function to handle login checks
     function loadSubscription(subscription_id) {
-        // Retrieve token from session storage
-        var token = sessionStorage.getItem('access_token');
+        const token = Init.getToken();
 
         $.ajax({
             type: 'GET',
@@ -52,7 +38,7 @@ $(document).ready(function() {
                 $('#subscription-payment-status').html(data.payment_status.charAt(0).toUpperCase() + data.payment_status.slice(1));
                 $('#subscription-auto-renew').html(data.auto_renew === 1 ? "Yes" : "No");
 
-                $('#subscription-created-date').html(new Date(data.created_at.substring(0,data.created_at.length-1)).toLocaleString('en-US', {
+                $('#subscription-created-date').html(new Date(data.created_at).toLocaleString('en-US', {
                     year: 'numeric',
                     weekday: 'long',
                     month: 'long',

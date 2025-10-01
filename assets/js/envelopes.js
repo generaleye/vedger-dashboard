@@ -1,18 +1,13 @@
 $(document).ready(function() {
     const protocol = $(location).attr('protocol');
-    const base_domain = getBaseDomain();
+    const base_domain = Init.getBaseDomain();
 
-    function getBaseDomain() {
-        const hostname = $(location).attr('hostname');
-        const domain_parts = hostname.split('.');
-        domain_parts.shift();
-        return domain_parts.join('.');
-    }
+    // Call the check login function when the page is loaded
+    loadEnvelopes();
 
     // Function to handle loading envelopes
     function loadEnvelopes() {
-        // Retrieve token from session storage
-        var token = sessionStorage.getItem('access_token');
+        const token = Init.getToken();
 
         $.ajax({
             type: 'GET',
@@ -22,7 +17,7 @@ $(document).ready(function() {
             },
             error: function(response) {
                 var err = JSON.parse(response.responseText);
-                var errorHtml = generateErrorHtml(err.message);
+                var errorHtml = Init.generateErrorHtml(err.message);
                 $('#message-container').html(errorHtml);
             },
             success: function (response) {
@@ -40,11 +35,8 @@ $(document).ready(function() {
                 }
 
                 $.each(data, function (key) {
-                    var createdAtWithoutZ= data[key].created_at.substring(0,data[key].created_at.length-1);
-                    var createdWithoutZDate= new Date(createdAtWithoutZ);
-
-                    var sendAtWithoutZ= data[key].scheduled_send_at.substring(0,data[key].scheduled_send_at.length-1);
-                    var sendWithoutZDate= new Date(sendAtWithoutZ);
+                    var createdAt= new Date(data[key].created_at);
+                    var sendAt= new Date(data[key].scheduled_send_at);
 
                     var $envelope_row = $('<tr>');
                     if (data[key].title.length > 40) {
@@ -58,9 +50,9 @@ $(document).ready(function() {
                         $envelope_row.append($('<td>').html(data[key].description));
                     }
                     $envelope_row.append($('<td>').html(data[key].alert_frequency.charAt(0).toUpperCase() + data[key].alert_frequency.slice(1)));
-                    $envelope_row.append($('<td>').html(sendWithoutZDate.toLocaleDateString() + ' <span class="text-muted text-sm d-block">' + sendWithoutZDate.toLocaleTimeString() + '</span>'));
+                    $envelope_row.append($('<td>').html(sendAt.toLocaleDateString() + ' <span class="text-muted text-sm d-block">' + sendAt.toLocaleTimeString() + '</span>'));
                     $envelope_row.append($('<td>').html(data[key].delivery_status.charAt(0).toUpperCase() + data[key].delivery_status.slice(1)));
-                    $envelope_row.append($('<td>').html(createdWithoutZDate.toLocaleDateString() + ' <span class="text-muted text-sm d-block">' + createdWithoutZDate.toLocaleTimeString() + '</span>'));
+                    $envelope_row.append($('<td>').html(createdAt.toLocaleDateString() + ' <span class="text-muted text-sm d-block">' + createdAt.toLocaleTimeString() + '</span>'));
                     $envelope_row.append($('<td>').addClass('text-end')
                         .html(
                             '<a class="avtar avtar-xs btn-link-secondary" href="read-envelope.html?id=' + data[key].uuid + '"><i class="ti ti-eye f-20"></i></a>' +
@@ -75,12 +67,9 @@ $(document).ready(function() {
         });
     }
 
-    // Call the check login function when the page is loaded
-    loadEnvelopes();
-
     // load update contact modal fields
     $(document).on('click', '.update-contact', function () {
-        var token = sessionStorage.getItem('access_token');
+        const token = Init.getToken();
         var contact_id = this.id;
         $.ajax({
             type: 'GET',
@@ -111,10 +100,10 @@ $(document).ready(function() {
         $('#update-contact-message-container').html('');
         $('#update').prop("disabled", true);
 
+        const token = Init.getToken();
+
         var $description = $('#update_contact_description').val();
         var $contact_id = $('#contact_id').val();
-
-        var token = sessionStorage.getItem('access_token');
 
         $.ajax({
             type: 'PATCH',
@@ -127,7 +116,7 @@ $(document).ready(function() {
             },
             error: function(response) {
                 var err = JSON.parse(response.responseText);
-                var errorHtml = generateErrorHtml(err.message);
+                var errorHtml = Init.generateErrorHtml(err.message);
                 $('#update-contact-message-container').html(errorHtml);
                 $('#update').prop("disabled", false);
             },
@@ -135,7 +124,7 @@ $(document).ready(function() {
                 var $status = response.status;
 
                 if ($status === 'success') {
-                    var successHtml = generateSuccessHtml(response.message);
+                    var successHtml = Init.generateSuccessHtml(response.message);
                     $('#update-contact-message-container').html(successHtml);
 
                     window.location.href = './contacts';
@@ -147,7 +136,7 @@ $(document).ready(function() {
     $(document).on('click', '.delete-envelope', function () {
         var confirm_delete = confirm('Are you sure you want to delete this envelope?');
         if(confirm_delete){
-            var token = sessionStorage.getItem('access_token');
+            const token = Init.getToken();
             var envelope_id = this.id;
 
             $.ajax({
@@ -160,7 +149,7 @@ $(document).ready(function() {
                     var $status = response.status;
 
                     if ($status === 'success') {
-                        var successHtml = generateSuccessHtml(response.message);
+                        var successHtml = Init.generateSuccessHtml(response.message);
                         $('#message-container').html(successHtml);
 
                         window.location.href = './envelopes';
@@ -169,18 +158,4 @@ $(document).ready(function() {
             });
         }
     });
-
-    function generateSuccessHtml(message) {
-        return '<div class="alert alert-success alert-dismissible fade show" role="alert">' +
-            '   <div><i class="fas fa-check-circle"> </i> ' + message + '</div>' +
-            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
-            '</div>';
-    }
-
-    function generateErrorHtml(message) {
-        return '<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
-            '   <div><i class="fas fa-exclamation-triangle"> </i> ' + message + '</div>' +
-            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
-            '</div>';
-    }
 });

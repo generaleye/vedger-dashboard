@@ -1,18 +1,13 @@
 $(document).ready(function() {
     const protocol = $(location).attr('protocol');
-    const base_domain = getBaseDomain();
+    const base_domain = Init.getBaseDomain();
 
-    function getBaseDomain() {
-        const hostname = $(location).attr('hostname');
-        const domain_parts = hostname.split('.');
-        domain_parts.shift();
-        return domain_parts.join('.');
-    }
+    // Call the check login function when the page is loaded
+    loadContacts();
 
     // Function to handle loading contacts
     function loadContacts() {
-        // Retrieve token from session storage
-        var token = sessionStorage.getItem('access_token');
+        const token = Init.getToken();
 
         $.ajax({
             type: 'GET',
@@ -22,7 +17,7 @@ $(document).ready(function() {
             },
             error: function(response) {
                 var err = JSON.parse(response.responseText);
-                var errorHtml = generateErrorHtml(err.message);
+                var errorHtml = Init.generateErrorHtml(err.message);
                 $('#message-container').html(errorHtml);
             },
             success: function (response) {
@@ -40,8 +35,7 @@ $(document).ready(function() {
                 }
 
                 $.each(data, function (key) {
-                    var creaatedWithoutZ= data[key].created_at.substring(0,data[key].created_at.length-1);
-                    var createdWithoutZDate= new Date(creaatedWithoutZ);
+                    let createdAt= new Date(data[key].created_at);
 
                     var $contact_row = $('<tr>');
                     $contact_row.append($('<td>').html(data[key].contact.first_name));
@@ -53,7 +47,7 @@ $(document).ready(function() {
                     } else {
                         $contact_row.append($('<td>').html(data[key].description));
                     }
-                    $contact_row.append($('<td>').html(createdWithoutZDate.toLocaleDateString() + ' <span class="text-muted text-sm d-block">' + createdWithoutZDate.toLocaleTimeString() + '</span>'));
+                    $contact_row.append($('<td>').html(createdAt.toLocaleDateString() + ' <span class="text-muted text-sm d-block">' + createdAt.toLocaleTimeString() + '</span>'));
                     $contact_row.append($('<td>').addClass('text-end')
                         .html(
                             '<a class="avtar avtar-xs btn-link-secondary update-contact" id="' + data[key].id + '" href="update-contact.html?id=' + data[key].id + '" data-bs-toggle="modal" data-bs-target="#updateContactModal"><i class="ti ti-edit f-20"></i></a>' +
@@ -67,13 +61,11 @@ $(document).ready(function() {
         });
     }
 
-    // Call the check login function when the page is loaded
-    loadContacts();
-
     // load update contact modal fields
     $(document).on('click', '.update-contact', function () {
-        var token = sessionStorage.getItem('access_token');
+        const token = Init.getToken();
         var contact_id = this.id;
+
         $.ajax({
             type: 'GET',
             url: protocol + '//api.' + base_domain + '/v1/contacts/' + contact_id,
@@ -109,7 +101,7 @@ $(document).ready(function() {
         var $phone_number = $('#add_contact_phone_number').val();
         var $description = $('#add_contact_description').val();
 
-        var token = sessionStorage.getItem('access_token');
+        const token = Init.getToken();
 
         $.ajax({
             type: 'POST',
@@ -126,7 +118,7 @@ $(document).ready(function() {
             },
             error: function(response) {
                 var err = JSON.parse(response.responseText);
-                var errorHtml = generateErrorHtml(err.message);
+                var errorHtml = Init.generateErrorHtml(err.message);
                 $('#add-contact-message-container').html(errorHtml);
                 $('#add').prop("disabled", false);
             },
@@ -134,7 +126,7 @@ $(document).ready(function() {
                 var $status = response.status;
 
                 if ($status === 'success') {
-                    var successHtml = generateSuccessHtml(response.message);
+                    var successHtml = Init.generateSuccessHtml(response.message);
                     $('#add-contact-message-container').html(successHtml);
 
                     window.location.href = './contacts';
@@ -151,7 +143,7 @@ $(document).ready(function() {
         var $description = $('#update_contact_description').val();
         var $contact_id = $('#contact_id').val();
 
-        var token = sessionStorage.getItem('access_token');
+        const token = Init.getToken();
 
         $.ajax({
             type: 'PATCH',
@@ -164,7 +156,7 @@ $(document).ready(function() {
             },
             error: function(response) {
                 var err = JSON.parse(response.responseText);
-                var errorHtml = generateErrorHtml(err.message);
+                var errorHtml = Init.generateErrorHtml(err.message);
                 $('#update-contact-message-container').html(errorHtml);
                 $('#update').prop("disabled", false);
             },
@@ -172,7 +164,7 @@ $(document).ready(function() {
                 var $status = response.status;
 
                 if ($status === 'success') {
-                    var successHtml = generateSuccessHtml(response.message);
+                    var successHtml = Init.generateSuccessHtml(response.message);
                     $('#update-contact-message-container').html(successHtml);
 
                     window.location.href = './contacts';
@@ -184,7 +176,7 @@ $(document).ready(function() {
     $(document).on('click', '.delete-contact', function () {
         var confirm_delete = confirm('Are you sure you want to delete this contact?');
         if(confirm_delete){
-            var token = sessionStorage.getItem('access_token');
+            const token = Init.getToken();
             var contact_id = this.id;
 
             $.ajax({
@@ -203,18 +195,4 @@ $(document).ready(function() {
             });
         }
     });
-
-    function generateSuccessHtml(message) {
-        return '<div class="alert alert-success alert-dismissible fade show" role="alert">' +
-            '   <div><i class="fas fa-check-circle"> </i> ' + message + '</div>' +
-            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
-            '</div>';
-    }
-
-    function generateErrorHtml(message) {
-        return '<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
-            '   <div><i class="fas fa-exclamation-triangle"> </i> ' + message + '</div>' +
-            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
-            '</div>';
-    }
 });

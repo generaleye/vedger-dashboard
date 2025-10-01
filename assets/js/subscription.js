@@ -1,20 +1,12 @@
 $(document).ready(function() {
     const protocol = $(location).attr('protocol');
-    const base_domain = getBaseDomain();
-
-    function getBaseDomain() {
-        const hostname = $(location).attr('hostname');
-        const domain_parts = hostname.split('.');
-        domain_parts.shift();
-        return domain_parts.join('.');
-    }
+    const base_domain = Init.getBaseDomain();
 
     loadProfile();
     loadSubscriptions();
 
     function loadProfile() {
-        // Retrieve token from session storage
-        var token = sessionStorage.getItem('access_token');
+        const token = Init.getToken();
 
         $.ajax({
             type: 'GET',
@@ -31,8 +23,8 @@ $(document).ready(function() {
 
                 if (data.plan.code === 'BASIC') {
                     $('#subscription-frequency').html('Monthly');
-                    $('#subscription-start-at').html('Lifetime');
-                    $('#subscription-end-at').html('Lifetime');
+                    $('#subscription-start-at').html('-');
+                    $('#subscription-end-at').html('-');
                     // $('#subscription-amount').html('0 NGN');
                     $('#subscription-auto-renew').html("Yes");
 
@@ -64,13 +56,14 @@ $(document).ready(function() {
 
     $(function(){
         $(".standard").click(function(){
+            const token = Init.getToken();
+
             var selected = $(this).attr('id');
             var frequency = 'monthly';
             if (selected === 'standard-yearly') {
                 frequency = 'yearly';
             }
 
-            var token = sessionStorage.getItem('access_token');
             $.ajax({
                 type: 'POST',
                 url: protocol + '//api.' + base_domain + '/v1/subscriptions',
@@ -83,14 +76,14 @@ $(document).ready(function() {
                 },
                 error: function(response) {
                     var err = JSON.parse(response.responseText);
-                    var errorHtml = generateErrorHtml(err.message);
+                    var errorHtml = Init.generateErrorHtml(err.message);
                     $('#message-container').html(errorHtml);
                 },
                 success: function (response) {
                     var $status = response.status;
 
                     if ($status === 'success') {
-                        var successHtml = generateSuccessHtml(response.message);
+                        var successHtml = Init.generateSuccessHtml(response.message);
                         $('#message-container').html(successHtml);
                         var data = response.data;
 
@@ -106,8 +99,6 @@ $(document).ready(function() {
                     }
                 }
             });
-
-
         });
     });
 
@@ -116,9 +107,10 @@ $(document).ready(function() {
         $('#create-subscription-message-container').html('');
         $('#pay').prop("disabled", true);
 
+        const token = Init.getToken();
+
         var $subscription_uuid = $('#subscription_uuid').val();
 
-        var token = sessionStorage.getItem('access_token');
         $.ajax({
             type: 'POST',
             url: protocol + '//api.' + base_domain + '/v1/subscriptions/' + $subscription_uuid + '/pay',
@@ -127,7 +119,7 @@ $(document).ready(function() {
             },
             error: function(response) {
                 var err = JSON.parse(response.responseText);
-                var errorHtml = generateErrorHtml(err.message);
+                var errorHtml = Init.generateErrorHtml(err.message);
                 $('#create-subscription-message-container').html(errorHtml);
                 $('#pay').prop("disabled", false);
             },
@@ -135,7 +127,7 @@ $(document).ready(function() {
                 var $status = response.status;
 
                 if ($status === 'success') {
-                    var successHtml = generateSuccessHtml(response.message);
+                    var successHtml = Init.generateSuccessHtml(response.message);
                     $('#create-subscription-message-container').html(successHtml);
 
                     window.location.href = response.data.payment_link;
@@ -145,8 +137,7 @@ $(document).ready(function() {
     });
 
     function loadSubscriptions() {
-        // Retrieve token from session storage
-        var token = sessionStorage.getItem('access_token');
+        const token = Init.getToken();
 
         $.ajax({
             type: 'GET',
@@ -156,7 +147,7 @@ $(document).ready(function() {
             },
             error: function(response) {
                 var err = JSON.parse(response.responseText);
-                var errorHtml = generateErrorHtml(err.message);
+                var errorHtml = Init.generateErrorHtml(err.message);
                 $('#message-container').html(errorHtml);
             },
             success: function (response) {
@@ -174,8 +165,7 @@ $(document).ready(function() {
                 }
 
                 $.each(data, function (key) {
-                    var createdWithoutZ= data[key].created_at.substring(0,data[key].created_at.length-1);
-                    var createdWithoutZDate= new Date(createdWithoutZ);
+                    var createdAt= new Date(data[key].created_at);
 
                     var $subscription_row = $('<tr>');
                     $subscription_row.append($('<td>').html(data[key].plan.name));
@@ -184,7 +174,7 @@ $(document).ready(function() {
                     $subscription_row.append($('<td>').html(data[key].end_at));
                     $subscription_row.append($('<td>').html(parseFloat(data[key].amount).toLocaleString() + ' ' + data[key].currency.code ?? '-'));
                     $subscription_row.append($('<td>').html(data[key].payment_status.charAt(0).toUpperCase() + data[key].payment_status.slice(1)));
-                    $subscription_row.append($('<td>').html(createdWithoutZDate.toLocaleDateString() + ' <span class="text-muted text-sm d-block">' + createdWithoutZDate.toLocaleTimeString() + '</span>'));
+                    $subscription_row.append($('<td>').html(createdAt.toLocaleDateString() + ' <span class="text-muted text-sm d-block">' + createdAt.toLocaleTimeString() + '</span>'));
                     $subscription_row.append($('<td>').addClass('text-end')
                         .html(
                             '<a class="avtar avtar-xs btn-link-secondary" href="read-subscription.html?id=' + data[key].uuid + '"><i class="ti ti-eye f-20"></i></a>'
@@ -197,21 +187,10 @@ $(document).ready(function() {
         });
     }
 
-    function generateSuccessHtml(message) {
-        return '<div class="alert alert-success alert-dismissible fade show" role="alert">' +
-            '   <div><i class="fas fa-check-circle"> </i> ' + message + '</div>' +
-            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
-            '</div>';
-    }
-
-    function generateErrorHtml(message) {
-        return '<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
-            '   <div><i class="fas fa-exclamation-triangle"> </i> ' + message + '</div>' +
-            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
-            '</div>';
+    function downgrade() {
+        //TODO call an endpoint here
+        alert('Your plan will not auto renew');
     }
 });
 
-function downgrade() {
-    alert('Your plan will not auto renew');
-}
+

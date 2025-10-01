@@ -1,13 +1,12 @@
 $(document).ready(function() {
     const protocol = $(location).attr('protocol');
-    const base_domain = getBaseDomain();
+    const base_domain = Init.getBaseDomain();
 
-    function getBaseDomain() {
-        const hostname = $(location).attr('hostname');
-        const domain_parts = hostname.split('.');
-        domain_parts.shift();
-        return domain_parts.join('.');
-    }
+    loadOnceFrequencyInitialDate();
+    frequencyChangeListener();
+    reminderSwitchListener();
+    loadAssets();
+    loadContacts();
 
     function loadOnceFrequencyInitialDate() {
         var now= new Date();
@@ -56,7 +55,7 @@ $(document).ready(function() {
     }
 
     function loadAssets() {
-        var token = sessionStorage.getItem('access_token');
+        const token = Init.getToken();
 
         $.ajax({
             type: 'GET',
@@ -92,7 +91,7 @@ $(document).ready(function() {
     }
 
     function loadContacts() {
-        var token = sessionStorage.getItem('access_token');
+        const token = Init.getToken();
 
         $.ajax({
             type: 'GET',
@@ -127,12 +126,6 @@ $(document).ready(function() {
         });
     }
 
-    loadOnceFrequencyInitialDate();
-    frequencyChangeListener();
-    reminderSwitchListener();
-    loadAssets();
-    loadContacts();
-
     $('#create-envelope-form').on('submit', function(event) {
         event.preventDefault();
         $('#message-container').html('');
@@ -164,7 +157,7 @@ $(document).ready(function() {
         }
 
         if (!minimumCountError) {
-            var token = sessionStorage.getItem('access_token');
+            const token = Init.getToken();
 
             $.ajax({
                 type: 'POST',
@@ -184,7 +177,7 @@ $(document).ready(function() {
                 },
                 error: function(response) {
                     var err = JSON.parse(response.responseText);
-                    var errorHtml = generateErrorHtml(err.message);
+                    var errorHtml = Init.generateErrorHtml(err.message);
                     $('#message-container').html(errorHtml);
                     $('#submit').prop("disabled", false);
                 },
@@ -192,7 +185,7 @@ $(document).ready(function() {
                     var $status = response.status;
 
                     if ($status === 'success') {
-                        var successHtml = generateSuccessHtml(response.message);
+                        var successHtml = Init.generateSuccessHtml(response.message);
                         $('#message-container').html(successHtml);
 
                         window.location.href = './read-envelope.html?id='+response.data.uuid;
@@ -201,18 +194,4 @@ $(document).ready(function() {
             });
         }
     });
-
-    function generateSuccessHtml(message) {
-        return '<div class="alert alert-success alert-dismissible fade show" role="alert">' +
-            '   <div><i class="fas fa-check-circle"> </i> ' + message + '</div>' +
-            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
-            '</div>';
-    }
-
-    function generateErrorHtml(message) {
-        return '<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
-            '   <div><i class="fas fa-exclamation-triangle"> </i> ' + message + '</div>' +
-            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
-            '</div>';
-    }
 });

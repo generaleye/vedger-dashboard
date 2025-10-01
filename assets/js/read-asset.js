@@ -1,16 +1,9 @@
 $(document).ready(function() {
     const protocol = $(location).attr('protocol');
-    const base_domain = getBaseDomain();
-
-    function getBaseDomain() {
-        const hostname = $(location).attr('hostname');
-        const domain_parts = hostname.split('.');
-        domain_parts.shift();
-        return domain_parts.join('.');
-    }
+    const base_domain = Init.getBaseDomain();
 
     // Get the resource ID from the URL
-    const asset_id = getIdFromUrl();
+    const asset_id = Init.getIdFromUrl();
 
     // If the ID is present, fetch the resource details
     if (asset_id) {
@@ -27,7 +20,7 @@ $(document).ready(function() {
     $('#asset-delete-button').on('click', function() {
         var confirm_delete = confirm('Are you sure you want to delete this asset?');
         if(confirm_delete){
-            var token = sessionStorage.getItem('access_token');
+            const token = Init.getToken();
             $.ajax({
                 type: 'DELETE',
                 url: protocol + '//api.' + base_domain + '/v1/assets/' + asset_id,
@@ -45,16 +38,9 @@ $(document).ready(function() {
         }
     } );
 
-    // Function to get the ID from the URL
-    function getIdFromUrl() {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get('id');
-    }
-
     // Function to handle login checks
     function loadAsset(asset_id) {
-        // Retrieve token from session storage
-        var token = sessionStorage.getItem('access_token');
+        const token = Init.getToken();
 
         $.ajax({
             type: 'GET',
@@ -75,7 +61,7 @@ $(document).ready(function() {
                 $('#asset-initial-value').html(parseFloat(data.initial_value).toLocaleString() + ' ' + data.currency.code ?? '-');
 
                 $('#asset-creator').html(data.creator.first_name + ' ' + data.creator.last_name);
-                $('#asset-created-date').html(new Date(data.created_at.substring(0,data.created_at.length-1)).toLocaleString('en-US', {
+                $('#asset-created-date').html(new Date(data.created_at).toLocaleString('en-US', {
                     year: 'numeric',
                     weekday: 'long',
                     month: 'long',
@@ -90,8 +76,7 @@ $(document).ready(function() {
     }
 
     function loadAssetValuations(asset_id) {
-        // Retrieve token from session storage
-        var token = sessionStorage.getItem('access_token');
+        const token = Init.getToken();
 
         $.ajax({
             type: 'GET',
@@ -117,12 +102,11 @@ $(document).ready(function() {
                 const chart_valuation_date_x_axis = [];
 
                 $.each(data, function (key, value) {
-                    var valuatedWithoutZ= data[key].valuated_at.substring(0,data[key].valuated_at.length-1);
-                    var valuatedWithoutZDate= new Date(valuatedWithoutZ);
+                    var valuatedAt= new Date(data[key].valuated_at);
 
                     var $asset_valuation_row = $('<tr>');
                     $asset_valuation_row.append($('<td>').html(parseFloat(data[key].value).toLocaleString() + ' ' + data[key].currency.code ?? '-'));
-                    $asset_valuation_row.append($('<td>').html(valuatedWithoutZDate.toLocaleDateString() + ' <span class="text-muted text-sm d-block">' + valuatedWithoutZDate.toLocaleTimeString() + '</span>'));
+                    $asset_valuation_row.append($('<td>').html(valuatedAt.toLocaleDateString() + ' <span class="text-muted text-sm d-block">' + valuatedAt.toLocaleTimeString() + '</span>'));
                     if (data[key].note == null) {
                         $asset_valuation_row.append($('<td>').html('-'));
                     } else if (data[key].note.length > 80) {
@@ -144,11 +128,9 @@ $(document).ready(function() {
                     chart_valuation_date_x_axis.push(data[key].valuated_at.substring(0, 16).replace('T', ' '));
                 });
 
-
                 var options = {
                     series: [{
                         name: 'Valuation',
-                        // data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
                         data: chart_valuation_data_y_axis.reverse()
                     }],
                     chart: {
@@ -164,10 +146,6 @@ $(document).ready(function() {
                     stroke: {
                         curve: 'straight'
                     },
-                    // title: {
-                    //     text: 'Product Trends by Month',
-                    //     align: 'left'
-                    // },
                     grid: {
                         row: {
                             colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
@@ -175,7 +153,6 @@ $(document).ready(function() {
                         },
                     },
                     xaxis: {
-                        // categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
                         categories: chart_valuation_date_x_axis.reverse(),
                     }
                 };
@@ -186,18 +163,17 @@ $(document).ready(function() {
         });
     }
 
-
     $('#add-asset-value').on('submit', function(event) {
         event.preventDefault();
         $('#add-value-message-container').html('');
         $('#submit').prop("disabled", true);
 
+        const token = Init.getToken();
+
         var $add_value = parseFloat($('#add_value').val()).toFixed(2);
         var $add_value_date = $('#add_value_date').val();
         var $add_note = $('#add_note').val();
         var $currency_id = $('#currency_id').val();
-
-        var token = sessionStorage.getItem('access_token');
 
         $.ajax({
             type: 'POST',
@@ -213,7 +189,7 @@ $(document).ready(function() {
             },
             error: function(response) {
                 var err = JSON.parse(response.responseText);
-                var errorHtml = generateErrorHtml(err.message);
+                var errorHtml = Init.generateErrorHtml(err.message);
                 $('#add-value-message-container').html(errorHtml);
                 $('#submit').prop("disabled", false);
             },
@@ -221,7 +197,7 @@ $(document).ready(function() {
                 var $status = response.status;
 
                 if ($status === 'success') {
-                    var successHtml = generateSuccessHtml(response.message);
+                    var successHtml = Init.generateSuccessHtml(response.message);
                     $('#add-value-message-container').html(successHtml);
 
                     window.location.href = './read-asset.html?id=' + asset_id;
@@ -235,13 +211,13 @@ $(document).ready(function() {
         $('#update-value-message-container').html('');
         $('#update').prop("disabled", true);
 
+        const token = Init.getToken();
+
         var $update_value = parseFloat($('#update_value').val()).toFixed(2);
         var $update_value_date = $('#update_value_date').val();
         var $update_note = $('#update_note').val();
         var $currency_id = $('#currency_id_update').val();
         var $valuation_id = $('#valuation_id').val();
-
-        var token = sessionStorage.getItem('access_token');
 
         $.ajax({
             type: 'PATCH',
@@ -257,7 +233,7 @@ $(document).ready(function() {
             },
             error: function(response) {
                 var err = JSON.parse(response.responseText);
-                var errorHtml = generateErrorHtml(err.message);
+                var errorHtml = Init.generateErrorHtml(err.message);
                 $('#update-value-message-container').html(errorHtml);
                 $('#update').prop("disabled", false);
             },
@@ -265,7 +241,7 @@ $(document).ready(function() {
                 var $status = response.status;
 
                 if ($status === 'success') {
-                    var successHtml = generateSuccessHtml(response.message);
+                    var successHtml = Init.generateSuccessHtml(response.message);
                     $('#update-value-message-container').html(successHtml);
 
                     window.location.href = './read-asset.html?id=' + asset_id;
@@ -281,8 +257,9 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '.update-asset-value', function () {
-        var token = sessionStorage.getItem('access_token');
+        const token = Init.getToken();
         var valuation_id = this.id;
+
         $.ajax({
             type: 'GET',
             url: protocol + '//api.' + base_domain + '/v1/assets/' + asset_id + '/valuations/' + valuation_id,
@@ -293,13 +270,11 @@ $(document).ready(function() {
                 var $status = response.status;
 
                 if ($status === 'success') {
-
                     var data = response.data;
-                    var valuatedWithoutZ  =  data.valuated_at.substring(0,data.valuated_at.length-1);
-                    var valuatedWithoutZDate = new Date(valuatedWithoutZ);
+                    var valuatedAt = new Date(data.valuated_at);
                     // Format Date object to HTML datetime-local string
                     const pad = (num) => String(num).padStart(2, '0');
-                    const htmlDateTimeLocal = `${valuatedWithoutZDate.getFullYear()}-${pad(valuatedWithoutZDate.getMonth() + 1)}-${pad(valuatedWithoutZDate.getDate())}T${pad(valuatedWithoutZDate.getHours())}:${pad(valuatedWithoutZDate.getMinutes())}`;
+                    const htmlDateTimeLocal = `${valuatedAt.getFullYear()}-${pad(valuatedAt.getMonth() + 1)}-${pad(valuatedAt.getDate())}T${pad(valuatedAt.getHours())}:${pad(valuatedAt.getMinutes())}`;
 
                     $('#update_value').val(data.value);
                     $('#update_note').val(data.note);
@@ -318,7 +293,7 @@ $(document).ready(function() {
     $(document).on('click', '.delete-asset-value', function () {
         var confirm_delete = confirm('Are you sure you want to delete this asset valuation?');
         if(confirm_delete){
-            var token = sessionStorage.getItem('access_token');
+            const token = Init.getToken();
             var valuation_id = this.id;
             $.ajax({
                 type: 'DELETE',
@@ -336,18 +311,4 @@ $(document).ready(function() {
             });
         }
     });
-
-    function generateSuccessHtml(message) {
-        return '<div class="alert alert-success alert-dismissible fade show" role="alert">' +
-            '   <div><i class="fas fa-check-circle"> </i> ' + message + '</div>' +
-            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
-            '</div>';
-    }
-
-    function generateErrorHtml(message) {
-        return '<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
-            '   <div><i class="fas fa-exclamation-triangle"> </i> ' + message + '</div>' +
-            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
-            '</div>';
-    }
 });

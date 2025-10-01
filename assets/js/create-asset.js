@@ -1,30 +1,22 @@
 $(document).ready(function() {
     const protocol = $(location).attr('protocol');
-    const base_domain = getBaseDomain();
-
-    function getBaseDomain() {
-        const hostname = $(location).attr('hostname');
-        const domain_parts = hostname.split('.');
-        domain_parts.shift();
-        return domain_parts.join('.');
-    }
-
-    loadCurrencies();
+    const base_domain = Init.getBaseDomain();
 
     loadProfile();
+    loadCurrencies();
 
     $('#create-asset-form').on('submit', function(event) {
         event.preventDefault();
         $('#message-container').html('');
         $('#submit').prop("disabled", true);
 
+        const token = Init.getToken();
+
         var $asset_name = $('#asset_name').val();
         var $asset_type = $('#asset_type').val();
         var $asset_description = $('#asset_description').val();
         var $value = parseFloat($('#value').val()).toFixed(2);
         var $currency_id = $('#asset_currency').val();
-
-        var token = sessionStorage.getItem('access_token');
 
         $.ajax({
             type: 'POST',
@@ -41,7 +33,7 @@ $(document).ready(function() {
             },
             error: function(response) {
                 var err = JSON.parse(response.responseText);
-                var errorHtml = generateErrorHtml(err.message);
+                var errorHtml = Init.generateErrorHtml(err.message);
                 $('#message-container').html(errorHtml);
                 $('#submit').prop("disabled", false);
             },
@@ -49,7 +41,7 @@ $(document).ready(function() {
                 var $status = response.status;
 
                 if ($status === 'success') {
-                    var successHtml = generateSuccessHtml(response.message);
+                    var successHtml = Init.generateSuccessHtml(response.message);
                     $('#message-container').html(successHtml);
 
                     window.location.href = './read-asset.html?id='+response.data.uuid;
@@ -59,8 +51,7 @@ $(document).ready(function() {
     });
 
     function loadProfile() {
-        // Retrieve token from session storage
-        var token = sessionStorage.getItem('access_token');
+        const token = Init.getToken();
 
         $.ajax({
             type: 'GET',
@@ -96,19 +87,5 @@ $(document).ready(function() {
                 });
             }
         });
-    }
-
-    function generateSuccessHtml(message) {
-        return '<div class="alert alert-success alert-dismissible fade show" role="alert">' +
-            '   <div><i class="fas fa-check-circle"> </i> ' + message + '</div>' +
-            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
-            '</div>';
-    }
-
-    function generateErrorHtml(message) {
-        return '<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
-            '   <div><i class="fas fa-exclamation-triangle"> </i> ' + message + '</div>' +
-            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
-            '</div>';
     }
 });
